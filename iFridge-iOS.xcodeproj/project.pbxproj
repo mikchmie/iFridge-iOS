@@ -7,20 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8011FD2A64E519B739E0E507 /* Pods_iFridge_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9663B83C70FC304727CEFE3F /* Pods_iFridge_iOS.framework */; };
+		D03192A01DA9200800038E88 /* FridgeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031929F1DA9200800038E88 /* FridgeApi.swift */; };
+		D03192A51DA9222100038E88 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03192A41DA9222100038E88 /* Product.swift */; };
+		D03192A81DA924E800038E88 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03192A71DA924E800038E88 /* ProductTableViewCell.swift */; };
+		D03192AB1DA9257100038E88 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03192AA1DA9257100038E88 /* ReusableView.swift */; };
+		D03192AE1DA928EE00038E88 /* iFridge_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D03192AC1DA928EE00038E88 /* iFridge_iOS.xcdatamodeld */; };
 		D0853E3D1DA7BF0300791D00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0853E3C1DA7BF0300791D00 /* AppDelegate.swift */; };
-		D0853E3F1DA7BF0300791D00 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0853E3E1DA7BF0300791D00 /* ViewController.swift */; };
+		D0853E3F1DA7BF0300791D00 /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0853E3E1DA7BF0300791D00 /* ProductsTableViewController.swift */; };
 		D0853E421DA7BF0300791D00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0853E401DA7BF0300791D00 /* Main.storyboard */; };
-		D0853E451DA7BF0300791D00 /* iFridge_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0853E431DA7BF0300791D00 /* iFridge_iOS.xcdatamodeld */; };
 		D0853E471DA7BF0300791D00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0853E461DA7BF0300791D00 /* Assets.xcassets */; };
 		D0853E4A1DA7BF0300791D00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0853E481DA7BF0300791D00 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D311E2E22346391880F6AEC /* Pods-iFridge-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFridge-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iFridge-iOS/Pods-iFridge-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6AF166F9F0ABD10C7DA29DD4 /* Pods-iFridge-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFridge-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-iFridge-iOS/Pods-iFridge-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		9663B83C70FC304727CEFE3F /* Pods_iFridge_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFridge_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D031929F1DA9200800038E88 /* FridgeApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeApi.swift; sourceTree = "<group>"; };
+		D03192A41DA9222100038E88 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		D03192A71DA924E800038E88 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		D03192AA1DA9257100038E88 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		D03192AD1DA928EE00038E88 /* iFridge_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iFridge_iOS.xcdatamodel; sourceTree = "<group>"; };
 		D0853E391DA7BF0300791D00 /* iFridge-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iFridge-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0853E3C1DA7BF0300791D00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D0853E3E1DA7BF0300791D00 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D0853E3E1DA7BF0300791D00 /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		D0853E411DA7BF0300791D00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D0853E441DA7BF0300791D00 /* iFridge_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iFridge_iOS.xcdatamodel; sourceTree = "<group>"; };
 		D0853E461DA7BF0300791D00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0853E491DA7BF0300791D00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0853E4B1DA7BF0300791D00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,17 +43,104 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8011FD2A64E519B739E0E507 /* Pods_iFridge_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E0EABFDEFDECDC343836492 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2D311E2E22346391880F6AEC /* Pods-iFridge-iOS.debug.xcconfig */,
+				6AF166F9F0ABD10C7DA29DD4 /* Pods-iFridge-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9A39C0C1D72F3DC8560FB79F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9663B83C70FC304727CEFE3F /* Pods_iFridge_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D031929A1DA91F0500038E88 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				D03192A11DA921AB00038E88 /* NetworkDataModel */,
+				D031929F1DA9200800038E88 /* FridgeApi.swift */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		D031929B1DA91F2500038E88 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				D03192AC1DA928EE00038E88 /* iFridge_iOS.xcdatamodeld */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		D031929C1DA91F3600038E88 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D0853E3E1DA7BF0300791D00 /* ProductsTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D031929D1DA91F4500038E88 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D0853E461DA7BF0300791D00 /* Assets.xcassets */,
+				D0853E4B1DA7BF0300791D00 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D031929E1DA91F5700038E88 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D0853E481DA7BF0300791D00 /* LaunchScreen.storyboard */,
+				D0853E401DA7BF0300791D00 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D03192A11DA921AB00038E88 /* NetworkDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				D03192A41DA9222100038E88 /* Product.swift */,
+			);
+			path = NetworkDataModel;
+			sourceTree = "<group>";
+		};
+		D03192A61DA924BC00038E88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D03192A71DA924E800038E88 /* ProductTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D03192A91DA9253500038E88 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D03192AA1DA9257100038E88 /* ReusableView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D0853E301DA7BF0300791D00 = {
 			isa = PBXGroup;
 			children = (
 				D0853E3B1DA7BF0300791D00 /* iFridge-iOS */,
 				D0853E3A1DA7BF0300791D00 /* Products */,
+				6E0EABFDEFDECDC343836492 /* Pods */,
+				9A39C0C1D72F3DC8560FB79F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,12 +156,13 @@
 			isa = PBXGroup;
 			children = (
 				D0853E3C1DA7BF0300791D00 /* AppDelegate.swift */,
-				D0853E3E1DA7BF0300791D00 /* ViewController.swift */,
-				D0853E401DA7BF0300791D00 /* Main.storyboard */,
-				D0853E461DA7BF0300791D00 /* Assets.xcassets */,
-				D0853E481DA7BF0300791D00 /* LaunchScreen.storyboard */,
-				D0853E4B1DA7BF0300791D00 /* Info.plist */,
-				D0853E431DA7BF0300791D00 /* iFridge_iOS.xcdatamodeld */,
+				D031929B1DA91F2500038E88 /* DataModel */,
+				D03192A91DA9253500038E88 /* Extensions */,
+				D031929A1DA91F0500038E88 /* NetworkLayer */,
+				D031929D1DA91F4500038E88 /* Resources */,
+				D031929E1DA91F5700038E88 /* Storyboards */,
+				D031929C1DA91F3600038E88 /* ViewControllers */,
+				D03192A61DA924BC00038E88 /* Views */,
 			);
 			path = "iFridge-iOS";
 			sourceTree = "<group>";
@@ -74,9 +174,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0853E4E1DA7BF0300791D00 /* Build configuration list for PBXNativeTarget "iFridge-iOS" */;
 			buildPhases = (
+				963E22D6572B88F8EC62ADC7 /* [CP] Check Pods Manifest.lock */,
 				D0853E351DA7BF0300791D00 /* Sources */,
 				D0853E361DA7BF0300791D00 /* Frameworks */,
 				D0853E371DA7BF0300791D00 /* Resources */,
+				E45BE729E8E3175B14CD5A43 /* [CP] Embed Pods Frameworks */,
+				4BFCC5A4E15E3E52BDBD612D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -135,14 +238,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4BFCC5A4E15E3E52BDBD612D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iFridge-iOS/Pods-iFridge-iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		963E22D6572B88F8EC62ADC7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E45BE729E8E3175B14CD5A43 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iFridge-iOS/Pods-iFridge-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D0853E351DA7BF0300791D00 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0853E3F1DA7BF0300791D00 /* ViewController.swift in Sources */,
+				D0853E3F1DA7BF0300791D00 /* ProductsTableViewController.swift in Sources */,
+				D03192A01DA9200800038E88 /* FridgeApi.swift in Sources */,
 				D0853E3D1DA7BF0300791D00 /* AppDelegate.swift in Sources */,
-				D0853E451DA7BF0300791D00 /* iFridge_iOS.xcdatamodeld in Sources */,
+				D03192AE1DA928EE00038E88 /* iFridge_iOS.xcdatamodeld in Sources */,
+				D03192A51DA9222100038E88 /* Product.swift in Sources */,
+				D03192AB1DA9257100038E88 /* ReusableView.swift in Sources */,
+				D03192A81DA924E800038E88 /* ProductTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,10 +416,11 @@
 		};
 		D0853E4F1DA7BF0300791D00 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D311E2E22346391880F6AEC /* Pods-iFridge-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = V5T4VNV573;
-				INFOPLIST_FILE = "iFridge-iOS/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/iFridge-iOS/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mc.iFridge-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -274,10 +430,11 @@
 		};
 		D0853E501DA7BF0300791D00 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AF166F9F0ABD10C7DA29DD4 /* Pods-iFridge-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = V5T4VNV573;
-				INFOPLIST_FILE = "iFridge-iOS/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/iFridge-iOS/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mc.iFridge-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -304,17 +461,19 @@
 				D0853E501DA7BF0300791D00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D0853E431DA7BF0300791D00 /* iFridge_iOS.xcdatamodeld */ = {
+		D03192AC1DA928EE00038E88 /* iFridge_iOS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D0853E441DA7BF0300791D00 /* iFridge_iOS.xcdatamodel */,
+				D03192AD1DA928EE00038E88 /* iFridge_iOS.xcdatamodel */,
 			);
-			currentVersion = D0853E441DA7BF0300791D00 /* iFridge_iOS.xcdatamodel */;
-			path = iFridge_iOS.xcdatamodeld;
+			currentVersion = D03192AD1DA928EE00038E88 /* iFridge_iOS.xcdatamodel */;
+			name = iFridge_iOS.xcdatamodeld;
+			path = DataModel/iFridge_iOS.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
