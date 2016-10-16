@@ -31,7 +31,9 @@ class Authenticator {
 
     func logIn(login: String, password: String, completion: @escaping (AuthenticationError?) -> Void) {
 
-        FridgeApiProvider.request(.logIn(login: login, password: password)) { (result) in
+        let passwordHash = password.sha256
+
+        FridgeApiProvider.request(.logIn(login: login, password: passwordHash)) { (result) in
 
             switch result {
 
