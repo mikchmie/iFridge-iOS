@@ -17,7 +17,7 @@ extension ReusableView where Self: UIView {
 
     static var defaultReusableIdentifier: String {
         get {
-            return String(describing: type(of: self))
+            return String(describing: Mirror(reflecting: self).subjectType)
         }
     }
 }
@@ -28,7 +28,7 @@ extension UICollectionReusableView: ReusableView {}
 
 extension UITableView {
 
-    convenience init(cellClasses: [ReusableView.Type], headerFooterClasses: [ReusableView.Type]) {
+    convenience init(cellClasses: [ReusableView.Type], headerFooterClasses: [ReusableView.Type] = []) {
 
         self.init()
 
@@ -44,8 +44,7 @@ extension UITableView {
 
     func dequeueReusableCell<T: ReusableView>(_ cellType: T.Type) -> T? {
 
-        let id = cellType.defaultReusableIdentifier
-        return self.dequeueReusableCell(withIdentifier: id) as? T
+        return self.dequeueReusableCell(withIdentifier: cellType.defaultReusableIdentifier) as? T
     }
 
     func dequeueReusableHeaderFooterView<T: ReusableView>(_ cellType: T.Type) -> T? {
@@ -56,7 +55,7 @@ extension UITableView {
 
 extension UICollectionView {
 
-    convenience init(cellClasses: [ReusableView.Type], supplementaryViewClassesWithKinds: [(ReusableView.Type, String)]) {
+    convenience init(cellClasses: [ReusableView.Type], supplementaryViewClassesWithKinds: [(ReusableView.Type, String)] = []) {
 
         self.init()
 

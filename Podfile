@@ -3,9 +3,10 @@ use_frameworks!
 
 target 'iFridge-iOS' do
 
-	pod 'Moya', :git => 'https://github.com/Moya/Moya', :branch => 'swift-3.0'
+	pod 'Moya', '8.0.0-beta.2'
 	pod 'Unbox'
 	pod 'Wrap'
+    pod 'SwiftyJSON'
 	pod 'SnapKit'
 
 end

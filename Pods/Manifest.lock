@@ -1,39 +1,32 @@
 PODS:
   - Alamofire (4.0.1)
-  - Moya (7.0.0):
-    - Moya/Core (= 7.0.0)
-  - Moya/Core (7.0.0):
+  - Moya (8.0.0-beta.2):
+    - Moya/Core (= 8.0.0-beta.2)
+  - Moya/Core (8.0.0-beta.2):
     - Alamofire (~> 4.0.0)
     - Result
   - Result (3.0.0)
   - SnapKit (3.0.2)
-  - Unbox (2.0)
+  - SwiftyJSON (3.1.1)
+  - Unbox (2.1)
   - Wrap (2.0)
 
 DEPENDENCIES:
-  - Moya (from `https://github.com/Moya/Moya`, branch `swift-3.0`)
+  - Moya (= 8.0.0-beta.2)
   - SnapKit
+  - SwiftyJSON
   - Unbox
   - Wrap
 
-EXTERNAL SOURCES:
-  Moya:
-    :branch: swift-3.0
-    :git: https://github.com/Moya/Moya
-
-CHECKOUT OPTIONS:
-  Moya:
-    :commit: 7c41718d1fe2a1e8616264c3361154d9df566e97
-    :git: https://github.com/Moya/Moya
-
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  Moya: 24236189772d63640d9d2f7c819157f3bc947420
+  Moya: 920d40f738e6f4ece84010cec701bb9693be8251
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
-  Unbox: 4838b95f7d6b7cb125cb7577b355640410fdd318
+  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+  Unbox: 7070b89261391fbd1a9ccb5029079a884b897a62
   Wrap: e9efa35ea41984a77bf2de4c9492c53ddc443085
 
-PODFILE CHECKSUM: 0c724366e2deef10042bce4dd7b067723e0d73c1
+PODFILE CHECKSUM: e7403414538d954a52801a3a3e4b7bb36658f92c
 
 COCOAPODS: 1.1.0.rc.2

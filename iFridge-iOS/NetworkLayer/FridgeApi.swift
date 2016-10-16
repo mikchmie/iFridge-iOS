@@ -7,12 +7,26 @@
 //
 
 import Moya
+import Wrap
 
-let FridgeApiProvider = MoyaProvider<FridgeApi>()
+let endpointClosure = { (target: FridgeApi) -> Endpoint<FridgeApi> in
+
+    let url = target.baseURL.appendingPathComponent(target.path).absoluteString
+
+    let endpoint: Endpoint<FridgeApi> = Endpoint<FridgeApi>(URL: url, sampleResponseClosure: {.networkResponse(200, target.sampleData)},
+                                                            method: target.method, parameters: target.parameters,
+                                                            parameterEncoding: target.parameterEncoding)
+    return endpoint
+}
+
+let FridgeApiProvider = MoyaProvider<FridgeApi>(endpointClosure: endpointClosure)
 
 enum FridgeApi {
 
-    case getAllProducts
+    case logIn(login: String, password: String)
+    case getAllProducts(token: String)
+    case saveProduct(product: Product, token: String)
+    case addProduct(product: Product, token: String)
 }
 
 extension FridgeApi: TargetType {
@@ -23,8 +37,11 @@ extension FridgeApi: TargetType {
 
         switch self {
 
-        case .getAllProducts:
-            return "/product/list"
+        case .logIn:
+            return "/auth/login"
+
+        case .getAllProducts, .saveProduct, .addProduct:
+            return "/products"
         }
     }
 
@@ -34,6 +51,12 @@ extension FridgeApi: TargetType {
 
         case .getAllProducts:
             return .GET
+
+        case .logIn, .saveProduct:
+            return .POST
+
+        case .addProduct:
+            return .PUT
         }
     }
 
@@ -41,11 +64,32 @@ extension FridgeApi: TargetType {
 
         switch self {
 
-        default:
-            return nil
+        case .logIn(let login, let password):
+            return ["login": login,
+                    "password": password]
+
+        case .getAllProducts(let token):
+            return ["token": token]
+
+        case .saveProduct(let product, let token), .addProduct(let product, let token):
+
+            let wrappedProduct: [String : Any] = (try? wrap(product)) ?? [:]
+            return ["product": wrappedProduct,
+                    "token": token]
         }
     }
-    
+
+    var parameterEncoding: Moya.ParameterEncoding {
+        switch self {
+
+        case .logIn, .getAllProducts:
+            return URLEncoding.methodDependent
+
+        case .saveProduct, .addProduct:
+            return JSONEncoding.default
+        }
+    }
+
     var sampleData: Data {
         
         return Data()

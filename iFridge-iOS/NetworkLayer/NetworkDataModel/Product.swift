@@ -13,9 +13,14 @@ import Wrap
 struct Product: Unboxable {
 
     var id: Int
-    var name: String
-    var shop: String
-    var quantity: Int
+    var name: String = ""
+    var shop: String = ""
+    var quantity: Int = 0
+
+    init(id: Int) {
+        
+        self.id = id
+    }
 
     init(unboxer: Unboxer) throws {
 
@@ -26,12 +31,3 @@ struct Product: Unboxable {
     }
 
 }
-//
-//struct ProductList: Unboxable {
-//
-//    var products: [Product]
-//
-//    init(unboxer: Unboxer) throws {
-//        self.products
-//    }
-//}
