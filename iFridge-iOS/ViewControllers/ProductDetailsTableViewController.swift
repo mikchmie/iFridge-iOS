@@ -98,7 +98,7 @@ class ProductDetailsTableViewController: UITableViewController {
         }
 
         let method: FridgeApi = (self.isNewProduct == true ? .addProduct(product: self.product, token: token) :
-                                                             .saveProduct(product: self.product, token: token))
+                                                             .updateProduct(product: self.product, token: token))
 
         FridgeApiProvider.request(method) { (result) in
 
@@ -108,7 +108,7 @@ class ProductDetailsTableViewController: UITableViewController {
 
                 print(String(data: response.data, encoding: .utf8))
 
-                let json = JSON(response.data)
+                let json = JSON(data: response.data)
 
                 guard json["code"].intValue == 200 else {
                     handleError(nil)

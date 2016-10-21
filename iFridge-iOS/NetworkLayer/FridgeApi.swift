@@ -25,8 +25,8 @@ enum FridgeApi {
 
     case logIn(login: String, password: String)
     case getAllProducts(token: String)
-    case saveProduct(product: Product, token: String)
     case addProduct(product: Product, token: String)
+    case updateProduct(product: Product, token: String)
 }
 
 extension FridgeApi: TargetType {
@@ -40,8 +40,11 @@ extension FridgeApi: TargetType {
         case .logIn:
             return "/auth/login"
 
-        case .getAllProducts, .saveProduct, .addProduct:
+        case .getAllProducts, .addProduct:
             return "/products"
+
+        case .updateProduct(let product, _):
+            return "/products/\(product.id)"
         }
     }
 
@@ -52,10 +55,10 @@ extension FridgeApi: TargetType {
         case .getAllProducts:
             return .GET
 
-        case .logIn, .saveProduct:
+        case .logIn, .addProduct:
             return .POST
 
-        case .addProduct:
+        case .updateProduct:
             return .PUT
         }
     }
@@ -71,7 +74,7 @@ extension FridgeApi: TargetType {
         case .getAllProducts(let token):
             return ["token": token]
 
-        case .saveProduct(let product, let token), .addProduct(let product, let token):
+        case .addProduct(let product, let token), .updateProduct(let product, let token):
 
             let wrappedProduct: [String : Any] = (try? wrap(product)) ?? [:]
             return ["product": wrappedProduct,
@@ -85,7 +88,7 @@ extension FridgeApi: TargetType {
         case .logIn, .getAllProducts:
             return URLEncoding.methodDependent
 
-        case .saveProduct, .addProduct:
+        case .addProduct, .updateProduct:
             return JSONEncoding.default
         }
     }
