@@ -59,7 +59,7 @@ class ProductDetailsTableViewController: UITableViewController {
         self.quantityTextField.text = "\(Int(sender.value))"
     }
 
-    @IBAction func quantityTextFieldValueChanged(_ sender: UITextField) {
+    @IBAction func quantityTextFieldEditingChanged(_ sender: UITextField) {
 
         self.quantityStepper.value = Double(sender.text ?? "") ?? self.quantityStepper.value
     }
