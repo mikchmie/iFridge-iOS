@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Unbox
+import SwiftyJSON
 
 enum AuthenticationError: Error {
 
@@ -39,24 +39,22 @@ class Authenticator {
 
             case .success(let response):
 
-                do {
+                print(String(data: response.data, encoding: .utf8))
 
-                    let apiResponse: StringResponse = try unbox(data: response.data)
+                guard response.statusCode == 200 else {
 
-                    guard let token = apiResponse.value else {
-                        completion(.invalidCredentials)
-                        return
-                    }
+                    completion(response.statusCode == 401 ? .invalidCredentials : .other)
+                    return
+                }
 
-                    self.token = token
-                    completion(nil)
+                guard let token = String(data: response.data, encoding: .utf8) else {
 
-                } catch {
-
-                    print(error)
                     completion(.other)
                     return
                 }
+
+                self.token = token
+                completion(nil)
 
             case .failure(let error):
 

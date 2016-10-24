@@ -106,25 +106,18 @@ class ProductsTableViewController: UITableViewController {
 
                 print(String(data: response.data, encoding: .utf8))
 
+                guard response.statusCode != 401 else {
+
+                    DispatchQueue.main.async {
+                        self.authenticator.logOut()
+                        self.performSegue(withIdentifier: Segue.logIn.rawValue, sender: self)
+                    }
+
+                    return
+                }
+
                 do {
-                    let apiResponse: Response<Product> = try unbox(data: response.data)
-
-                    guard apiResponse.code != 403 else {
-
-                        DispatchQueue.main.async {
-                            self.authenticator.logOut()
-                            self.performSegue(withIdentifier: Segue.logIn.rawValue, sender: self)
-                        }
-                        
-                        return
-                    }
-
-                    guard let products = apiResponse.value else {
-                        handleError(nil)
-                        return
-                    }
-
-                    self.products = products
+                    self.products = try unbox(data: response.data)
                 }
                 catch {
                     handleError(error)

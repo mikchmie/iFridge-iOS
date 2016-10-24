@@ -15,7 +15,7 @@ let endpointClosure = { (target: FridgeApi) -> Endpoint<FridgeApi> in
 
     let endpoint: Endpoint<FridgeApi> = Endpoint<FridgeApi>(URL: url, sampleResponseClosure: {.networkResponse(200, target.sampleData)},
                                                             method: target.method, parameters: target.parameters,
-                                                            parameterEncoding: target.parameterEncoding)
+                                                            parameterEncoding: target.parameterEncoding, httpHeaderFields: target.httpHeaderFields)
     return endpoint
 }
 
@@ -71,14 +71,11 @@ extension FridgeApi: TargetType {
             return ["login": login,
                     "password": password]
 
-        case .getAllProducts(let token):
-            return ["token": token]
+        case .addProduct(let product, _), .updateProduct(let product, _):
+            return (try? wrap(product)) ?? [:]
 
-        case .addProduct(let product, let token), .updateProduct(let product, let token):
-
-            let wrappedProduct: [String : Any] = (try? wrap(product)) ?? [:]
-            return ["product": wrappedProduct,
-                    "token": token]
+        case .getAllProducts:
+            return nil
         }
     }
 
@@ -90,6 +87,18 @@ extension FridgeApi: TargetType {
 
         case .addProduct, .updateProduct:
             return JSONEncoding.default
+        }
+    }
+
+    var httpHeaderFields: [String: String]? {
+
+        switch self {
+
+        case .getAllProducts(let token), .addProduct(_, let token), .updateProduct(_, let token):
+            return ["Authorization": token]
+
+        case .logIn:
+            return nil
         }
     }
 

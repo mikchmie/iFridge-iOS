@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 
 class ProductDetailsTableViewController: UITableViewController {
 
@@ -108,9 +107,7 @@ class ProductDetailsTableViewController: UITableViewController {
 
                 print(String(data: response.data, encoding: .utf8))
 
-                let json = JSON(data: response.data)
-
-                guard json["code"].intValue == 200 else {
+                guard response.statusCode == 200 || response.statusCode == 201 else {
                     handleError(nil)
                     return
                 }
