@@ -27,6 +27,7 @@ enum FridgeApi {
     case getAllProducts(token: String)
     case addProduct(product: Product, token: String)
     case updateProduct(product: Product, token: String)
+    case deleteProduct(productID: Int, token: String)
 }
 
 extension FridgeApi: TargetType {
@@ -45,6 +46,9 @@ extension FridgeApi: TargetType {
 
         case .updateProduct(let product, _):
             return "/products/\(product.id)"
+
+        case .deleteProduct(let productID, _):
+            return "/products/\(productID)"
         }
     }
 
@@ -60,6 +64,9 @@ extension FridgeApi: TargetType {
 
         case .updateProduct:
             return .PUT
+
+        case .deleteProduct:
+            return .DELETE
         }
     }
 
@@ -74,7 +81,7 @@ extension FridgeApi: TargetType {
         case .addProduct(let product, _), .updateProduct(let product, _):
             return (try? wrap(product)) ?? [:]
 
-        case .getAllProducts:
+        case .getAllProducts, .deleteProduct:
             return nil
         }
     }
@@ -82,7 +89,7 @@ extension FridgeApi: TargetType {
     var parameterEncoding: Moya.ParameterEncoding {
         switch self {
 
-        case .logIn, .getAllProducts:
+        case .logIn, .getAllProducts, .deleteProduct:
             return URLEncoding.methodDependent
 
         case .addProduct, .updateProduct:
@@ -94,7 +101,7 @@ extension FridgeApi: TargetType {
 
         switch self {
 
-        case .getAllProducts(let token), .addProduct(_, let token), .updateProduct(_, let token):
+        case .getAllProducts(let token), .addProduct(_, let token), .updateProduct(_, let token), .deleteProduct(_, let token):
             return ["Authorization": token]
 
         case .logIn:

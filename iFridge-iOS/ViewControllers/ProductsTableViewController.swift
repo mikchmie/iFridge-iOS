@@ -72,13 +72,15 @@ class ProductsTableViewController: UITableViewController {
         self.getProducts()
     }
 
-    // MARK: - Products download
+    // MARK: - Products managment
 
-    func getProducts() {
+    fileprivate func getProducts(silent: Bool = false) {
 
         let handleError = { (error: Error?) in
 
-            self.displayDefaultAlertView(title: "Błąd", message: "Nie udało się pobrać listy produktów. Sprawdź czy masz połączenie z internetem lub spróbuj ponownie później.")
+            if silent == false {
+                self.displayDefaultAlertView(title: "Błąd", message: "Nie udało się pobrać listy produktów. Sprawdź czy masz połączenie z internetem lub spróbuj ponownie później.")
+            }
 
             if let error = error {
                 print(error)
@@ -134,6 +136,44 @@ class ProductsTableViewController: UITableViewController {
         }
     }
 
+    fileprivate func deleteProduct(productID: Int) {
+
+        let handleError = { (error: Error?) in
+
+            self.displayDefaultAlertView(title: "Błąd", message: "Nie udało się usunąć produktu. Sprawdź czy masz połączenie z internetem lub spróbuj ponownie później.")
+
+            if let error = error {
+                print(error)
+            }
+
+            self.getProducts(silent: true)
+        }
+
+        guard let token = self.authenticator.token else {
+            handleError(nil)
+            return
+        }
+
+        FridgeApiProvider.request(.deleteProduct(productID: productID, token: token)) { (result) in
+
+            switch result {
+
+            case .success(let response):
+
+                print(String(data: response.data, encoding: .utf8))
+
+                guard response.statusCode == 200 else {
+                    handleError(nil)
+                    return
+                }
+
+            case .failure(let error):
+                
+                handleError(error)
+            }
+        }
+    }
+
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -178,5 +218,21 @@ class ProductsTableViewController: UITableViewController {
 
         self.selectedProduct = products[indexPath.row]
         self.performSegue(withIdentifier: Segue.productDetails.rawValue, sender: self)
+    }
+
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Usuń") { (action, indexPath) in
+
+            guard indexPath.row < self.products.count else { return }
+
+            let productID = self.products[indexPath.row].id
+            self.products.remove(at: indexPath.row)
+            tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+
+            self.deleteProduct(productID: productID)
+        }
+
+        return [deleteAction]
     }
 }
