@@ -20,9 +20,12 @@ class ProductsTableViewController: UITableViewController {
     fileprivate var products: [Product] = []
     fileprivate var selectedProduct: Product?
 
-    fileprivate var authenticator: Authenticator {
+    private var authenticator: Authenticator {
         return UIApplication.appDelegate.authenticator
     }
+
+    private let syncManager = SyncManager()
+    private let productsManager = ProductsDBManager()
 
     // MARK: - View flow
 
@@ -35,7 +38,7 @@ class ProductsTableViewController: UITableViewController {
 
         guard self.authenticator.token != nil else {
 
-            self.performSegue(withIdentifier: Segue.logIn.rawValue, sender: self)
+            self.performLogOut()
             return
         }
 
@@ -48,7 +51,7 @@ class ProductsTableViewController: UITableViewController {
 
         guard self.authenticator.token != nil else {
 
-            self.performSegue(withIdentifier: Segue.logIn.rawValue, sender: self)
+            self.performLogOut()
             return
         }
 
@@ -57,121 +60,70 @@ class ProductsTableViewController: UITableViewController {
 
     @IBAction func logOutButtonWasPressed(_ sender: UIBarButtonItem) {
 
-        self.authenticator.logOut()
-        self.performSegue(withIdentifier: Segue.logIn.rawValue, sender: self)
+        self.performLogOut()
     }
 
     @IBAction func refreshControlWasTriggered(_ sender: UIRefreshControl) {
 
-        guard self.authenticator.token != nil else {
+        self.syncProducts()
+    }
 
-            self.performSegue(withIdentifier: Segue.logIn.rawValue, sender: self)
-            return
-        }
+    @IBAction func refreshButtonWasPressed(_ sender: UIBarButtonItem) {
 
-        self.getProducts()
+        self.syncProducts()
     }
 
     // MARK: - Products managment
 
-    fileprivate func getProducts(silent: Bool = false) {
+    private func syncProducts() {
 
-        let handleError = { (error: Error?) in
+        let commonCompletion = {
 
-            if silent == false {
-                self.displayDefaultAlertView(title: "Błąd", message: "Nie udało się pobrać listy produktów. Sprawdź czy masz połączenie z internetem lub spróbuj ponownie później.")
-            }
+            if let refreshControl = self.refreshControl,
+                refreshControl.isRefreshing == true {
 
-            if let error = error {
-                print(error)
+                refreshControl.endRefreshing()
             }
         }
 
         guard let token = self.authenticator.token else {
-            handleError(nil)
+
+            commonCompletion()
+
             return
         }
 
-        FridgeApiProvider.request(.getAllProducts(token: token)) { (result) in
+        self.syncManager.sync(token: token, completion: {
 
-            DispatchQueue.main.async {
-                if let refreshControl = self.refreshControl,
-                    refreshControl.isRefreshing == true {
+            commonCompletion()
+            self.getProducts()
 
-                    refreshControl.endRefreshing()
-                }
+        }, failure: { error in
+
+            commonCompletion()
+            print(error)
+
+            if case FridgeApiError.invalidResponseCode(401) = error {
+
+                self.performLogOut()
+
+            } else {
+
+                self.displayDefaultAlertView(title: "Błąd",
+                                             message: "Nie udało się zsynchronizować listy produktów. Sprawdź czy masz połączenie z internetem lub spróbuj ponownie później.")
             }
-
-            switch result {
-
-            case .success(let response):
-
-                print(String(data: response.data, encoding: .utf8))
-
-                guard response.statusCode != 401 else {
-
-                    DispatchQueue.main.async {
-                        self.authenticator.logOut()
-                        self.performSegue(withIdentifier: Segue.logIn.rawValue, sender: self)
-                    }
-
-                    return
-                }
-
-                do {
-                    self.products = try unbox(data: response.data)
-                }
-                catch {
-                    handleError(error)
-                }
-
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-
-            case .failure(let error):
-
-                handleError(error)
-            }
-        }
+        })
     }
 
-    fileprivate func deleteProduct(productID: Int) {
+    private func getProducts() {
 
-        let handleError = { (error: Error?) in
+        self.products = self.productsManager.getAll()
+        self.tableView.reloadData()
+    }
 
-            self.displayDefaultAlertView(title: "Błąd", message: "Nie udało się usunąć produktu. Sprawdź czy masz połączenie z internetem lub spróbuj ponownie później.")
+    private func deleteProduct(productID: Int) {
 
-            if let error = error {
-                print(error)
-            }
-
-            self.getProducts(silent: true)
-        }
-
-        guard let token = self.authenticator.token else {
-            handleError(nil)
-            return
-        }
-
-        FridgeApiProvider.request(.deleteProduct(productID: productID, token: token)) { (result) in
-
-            switch result {
-
-            case .success(let response):
-
-                print(String(data: response.data, encoding: .utf8))
-
-                guard response.statusCode == 200 else {
-                    handleError(nil)
-                    return
-                }
-
-            case .failure(let error):
-                
-                handleError(error)
-            }
-        }
+        self.productsManager.delete(productId: productID)
     }
 
     // MARK: - Navigation
@@ -182,15 +134,20 @@ class ProductsTableViewController: UITableViewController {
 
             guard let vc = segue.destination as? ProductDetailsTableViewController else { return }
             vc.product = self.selectedProduct
+            vc.authenticator = self.authenticator
+            vc.productsManager = self.productsManager
             self.selectedProduct = nil
         }
     }
 
-    // MARK: - Table view data source
+    private func performLogOut() {
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        self.authenticator.logOut()
+        self.productsManager.deleteAllEntities()
+        self.performSegue(withIdentifier: Segue.logIn.rawValue, sender: self)
     }
+
+    // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.products.count

@@ -12,13 +12,17 @@
 		D02541191DB2BB8200FBCB22 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02541181DB2BB8200FBCB22 /* UIApplication+Extension.swift */; };
 		D025411B1DB2BE3D00FBCB22 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D025411A1DB2BE3D00FBCB22 /* LogInViewController.swift */; };
 		D025411D1DB2CFAC00FBCB22 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D025411C1DB2CFAC00FBCB22 /* String+Extension.swift */; };
+		D02665981DFD7729007C63FB /* iFridge_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D02665961DFD7729007C63FB /* iFridge_iOS.xcdatamodeld */; };
+		D026659A1DFD78CB007C63FB /* ProductsDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02665991DFD78CB007C63FB /* ProductsDBManager.swift */; };
+		D026659C1DFD7F10007C63FB /* CDProduct+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026659B1DFD7F10007C63FB /* CDProduct+Extensions.swift */; };
 		D03192A01DA9200800038E88 /* FridgeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031929F1DA9200800038E88 /* FridgeApi.swift */; };
 		D03192A51DA9222100038E88 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03192A41DA9222100038E88 /* Product.swift */; };
 		D03192A81DA924E800038E88 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03192A71DA924E800038E88 /* ProductTableViewCell.swift */; };
 		D03192AB1DA9257100038E88 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03192AA1DA9257100038E88 /* ReusableView.swift */; };
-		D03192AE1DA928EE00038E88 /* iFridge_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D03192AC1DA928EE00038E88 /* iFridge_iOS.xcdatamodeld */; };
 		D03F5D651DB28CB60093019B /* ProductDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03F5D641DB28CB60093019B /* ProductDetailsTableViewController.swift */; };
 		D0424D3E1DB2721500426938 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0424D3D1DB2721500426938 /* UIViewController+Extension.swift */; };
+		D07546291DFDB9EE00EB2E6D /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07546281DFDB9EE00EB2E6D /* SyncManager.swift */; };
+		D075462B1DFDCD5800EB2E6D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D075462A1DFDCD5800EB2E6D /* Date+Extensions.swift */; };
 		D0853E3D1DA7BF0300791D00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0853E3C1DA7BF0300791D00 /* AppDelegate.swift */; };
 		D0853E3F1DA7BF0300791D00 /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0853E3E1DA7BF0300791D00 /* ProductsTableViewController.swift */; };
 		D0853E421DA7BF0300791D00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0853E401DA7BF0300791D00 /* Main.storyboard */; };
@@ -30,18 +34,22 @@
 		2D311E2E22346391880F6AEC /* Pods-iFridge-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFridge-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iFridge-iOS/Pods-iFridge-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6AF166F9F0ABD10C7DA29DD4 /* Pods-iFridge-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFridge-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-iFridge-iOS/Pods-iFridge-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		9663B83C70FC304727CEFE3F /* Pods_iFridge_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFridge_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D02541161DB2B80100FBCB22 /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authenticator.swift; path = DataModel/Authenticator.swift; sourceTree = "<group>"; };
+		D02541161DB2B80100FBCB22 /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		D02541181DB2BB8200FBCB22 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		D025411A1DB2BE3D00FBCB22 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		D025411C1DB2CFAC00FBCB22 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		D025411E1DB2D01100FBCB22 /* iFridge-iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iFridge-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		D02665971DFD7729007C63FB /* iFridge_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iFridge_iOS.xcdatamodel; sourceTree = "<group>"; };
+		D02665991DFD78CB007C63FB /* ProductsDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsDBManager.swift; sourceTree = "<group>"; };
+		D026659B1DFD7F10007C63FB /* CDProduct+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDProduct+Extensions.swift"; sourceTree = "<group>"; };
 		D031929F1DA9200800038E88 /* FridgeApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeApi.swift; sourceTree = "<group>"; };
 		D03192A41DA9222100038E88 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		D03192A71DA924E800038E88 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		D03192AA1DA9257100038E88 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
-		D03192AD1DA928EE00038E88 /* iFridge_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iFridge_iOS.xcdatamodel; sourceTree = "<group>"; };
 		D03F5D641DB28CB60093019B /* ProductDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsTableViewController.swift; sourceTree = "<group>"; };
 		D0424D3D1DB2721500426938 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		D07546281DFDB9EE00EB2E6D /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
+		D075462A1DFDCD5800EB2E6D /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		D0853E391DA7BF0300791D00 /* iFridge-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iFridge-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0853E3C1DA7BF0300791D00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0853E3E1DA7BF0300791D00 /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
@@ -92,10 +100,13 @@
 		D031929B1DA91F2500038E88 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				D03192AC1DA928EE00038E88 /* iFridge_iOS.xcdatamodeld */,
 				D02541161DB2B80100FBCB22 /* Authenticator.swift */,
+				D02665991DFD78CB007C63FB /* ProductsDBManager.swift */,
+				D07546281DFDB9EE00EB2E6D /* SyncManager.swift */,
+				D02665961DFD7729007C63FB /* iFridge_iOS.xcdatamodeld */,
+				D026659B1DFD7F10007C63FB /* CDProduct+Extensions.swift */,
 			);
-			name = DataModel;
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 		D031929C1DA91F3600038E88 /* ViewControllers */ = {
@@ -150,6 +161,7 @@
 				D0424D3D1DB2721500426938 /* UIViewController+Extension.swift */,
 				D02541181DB2BB8200FBCB22 /* UIApplication+Extension.swift */,
 				D025411C1DB2CFAC00FBCB22 /* String+Extension.swift */,
+				D075462A1DFDCD5800EB2E6D /* Date+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -217,7 +229,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = MC;
 				TargetAttributes = {
 					D0853E381DA7BF0300791D00 = {
@@ -316,13 +328,17 @@
 				D02541171DB2B80100FBCB22 /* Authenticator.swift in Sources */,
 				D0853E3F1DA7BF0300791D00 /* ProductsTableViewController.swift in Sources */,
 				D03192A01DA9200800038E88 /* FridgeApi.swift in Sources */,
+				D07546291DFDB9EE00EB2E6D /* SyncManager.swift in Sources */,
 				D0853E3D1DA7BF0300791D00 /* AppDelegate.swift in Sources */,
-				D03192AE1DA928EE00038E88 /* iFridge_iOS.xcdatamodeld in Sources */,
 				D025411B1DB2BE3D00FBCB22 /* LogInViewController.swift in Sources */,
+				D02665981DFD7729007C63FB /* iFridge_iOS.xcdatamodeld in Sources */,
+				D075462B1DFDCD5800EB2E6D /* Date+Extensions.swift in Sources */,
+				D026659A1DFD78CB007C63FB /* ProductsDBManager.swift in Sources */,
 				D03F5D651DB28CB60093019B /* ProductDetailsTableViewController.swift in Sources */,
 				D025411D1DB2CFAC00FBCB22 /* String+Extension.swift in Sources */,
 				D03192A51DA9222100038E88 /* Product.swift in Sources */,
 				D03192AB1DA9257100038E88 /* ReusableView.swift in Sources */,
+				D026659C1DFD7F10007C63FB /* CDProduct+Extensions.swift in Sources */,
 				D02541191DB2BB8200FBCB22 /* UIApplication+Extension.swift in Sources */,
 				D03192A81DA924E800038E88 /* ProductTableViewCell.swift in Sources */,
 			);
@@ -368,6 +384,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -417,6 +434,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -445,6 +463,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2D311E2E22346391880F6AEC /* Pods-iFridge-iOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = V5T4VNV573;
@@ -462,6 +481,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6AF166F9F0ABD10C7DA29DD4 /* Pods-iFridge-iOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = V5T4VNV573;
@@ -498,14 +518,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D03192AC1DA928EE00038E88 /* iFridge_iOS.xcdatamodeld */ = {
+		D02665961DFD7729007C63FB /* iFridge_iOS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D03192AD1DA928EE00038E88 /* iFridge_iOS.xcdatamodel */,
+				D02665971DFD7729007C63FB /* iFridge_iOS.xcdatamodel */,
 			);
-			currentVersion = D03192AD1DA928EE00038E88 /* iFridge_iOS.xcdatamodel */;
-			name = iFridge_iOS.xcdatamodeld;
-			path = DataModel/iFridge_iOS.xcdatamodeld;
+			currentVersion = D02665971DFD7729007C63FB /* iFridge_iOS.xcdatamodel */;
+			path = iFridge_iOS.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

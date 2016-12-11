@@ -8,6 +8,7 @@
 
 import Moya
 import Wrap
+import Unbox
 
 let endpointClosure = { (target: FridgeApi) -> Endpoint<FridgeApi> in
 
@@ -117,5 +118,141 @@ extension FridgeApi: TargetType {
     var task: Task {
         
         return .request
+    }
+}
+
+enum FridgeApiError: Swift.Error {
+
+    case invalidResponseCode(Int)
+}
+
+extension FridgeApi {
+
+    static func performGetAllProducts(token: String, completion: @escaping ([Product]) -> Void, failure: ((Swift.Error) -> Void)?) {
+
+        FridgeApiProvider.request(.getAllProducts(token: token)) { (result) in
+
+            switch result {
+
+            case .success(let response):
+
+                print("[GET] " + (String(data: response.data, encoding: .utf8) ?? ""))
+
+                guard response.statusCode == 200 else {
+
+                    failure?(FridgeApiError.invalidResponseCode(response.statusCode))
+                    return
+                }
+
+                do {
+                    let products: [Product] = try unbox(data: response.data)
+                    completion(products)
+
+                } catch {
+                    failure?(error)
+                    return
+                }
+
+            case .failure(let error):
+                
+                failure?(error)
+                return
+            }
+        }
+    }
+
+    static func performAddProduct(product: Product, token: String,
+                           completion: @escaping (Product) -> Void, failure: ((Swift.Error) -> Void)?) {
+
+        FridgeApiProvider.request(.addProduct(product: product, token: token)) { (result) in
+
+            switch result {
+
+            case .success(let response):
+
+                print("[ADD] " + (String(data: response.data, encoding: .utf8) ?? ""))
+
+                guard response.statusCode == 201 else {
+
+                    failure?(FridgeApiError.invalidResponseCode(response.statusCode))
+                    return
+                }
+
+                do {
+                    let product: Product = try unbox(data: response.data)
+                    completion(product)
+
+                } catch {
+                    failure?(error)
+                    return
+                }
+
+            case .failure(let error):
+                
+                failure?(error)
+                return
+            }
+        }
+    }
+
+    static func performUpdateProduct(product: Product, token: String,
+                              completion: @escaping (Product) -> Void, failure: ((Swift.Error) -> Void)?) {
+
+        FridgeApiProvider.request(.updateProduct(product: product, token: token)) { (result) in
+
+            switch result {
+
+            case .success(let response):
+
+                print("[UPDATE] " + (String(data: response.data, encoding: .utf8) ?? ""))
+
+                guard response.statusCode == 200 else {
+
+                    failure?(FridgeApiError.invalidResponseCode(response.statusCode))
+                    return
+                }
+
+                do {
+                    let product: Product = try unbox(data: response.data)
+                    completion(product)
+
+                } catch {
+                    failure?(error)
+                    return
+                }
+
+            case .failure(let error):
+                
+                failure?(error)
+                return
+            }
+        }
+    }
+
+    static func performDeleteProduct(productID: Int, token: String,
+                              completion: @escaping () -> Void, failure: ((Swift.Error) -> Void)?) {
+
+        FridgeApiProvider.request(.deleteProduct(productID: productID, token: token)) { (result) in
+
+            switch result {
+
+            case .success(let response):
+
+                print("[DELETE] " + (String(data: response.data, encoding: .utf8) ?? ""))
+
+                guard response.statusCode == 204 else {
+
+                    failure?(FridgeApiError.invalidResponseCode(response.statusCode))
+                    return
+                }
+
+                completion()
+
+            case .failure(let error):
+                
+                failure?(error)
+                return
+            }
+        }
     }
 }

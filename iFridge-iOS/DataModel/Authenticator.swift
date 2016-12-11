@@ -39,7 +39,7 @@ class Authenticator {
 
             case .success(let response):
 
-                print(String(data: response.data, encoding: .utf8))
+                print(String(data: response.data, encoding: .utf8) ?? "")
 
                 guard response.statusCode == 200 else {
 

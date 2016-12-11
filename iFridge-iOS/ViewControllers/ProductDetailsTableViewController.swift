@@ -11,11 +11,10 @@ import UIKit
 class ProductDetailsTableViewController: UITableViewController {
 
     var product: Product!
-    var authenticator: Authenticator {
-        return UIApplication.appDelegate.authenticator
-    }
+    var authenticator: Authenticator!
+    var productsManager: ProductsDBManager!
     var isNewProduct: Bool {
-        return self.product.id == -1
+        return self.product.id == Int(ProductsDBManager.NoID)
     }
 
     @IBOutlet weak var nameTextField: UITextField!
@@ -30,7 +29,7 @@ class ProductDetailsTableViewController: UITableViewController {
 
         if self.product == nil {
 
-            self.product = Product(id: -1)
+            self.product = Product(id: Int(ProductsDBManager.NoID))
         }
 
         let navigationBar = UINavigationBar()
@@ -42,7 +41,9 @@ class ProductDetailsTableViewController: UITableViewController {
         self.tableView.allowsSelection = false
 
         self.nameTextField.text = self.product.name
+        self.nameTextField.isEnabled = self.isNewProduct
         self.shopTextField.text = self.product.shop
+        self.shopTextField.isEnabled = self.isNewProduct
         self.quantityTextField.text = "\(self.product.quantity)"
         self.quantityStepper.value = Double(self.product.quantity)
     }
@@ -82,43 +83,22 @@ class ProductDetailsTableViewController: UITableViewController {
 
     func saveProduct() {
 
-        let handleError = { (error: Error?) in
+        if self.isNewProduct == true {
 
-            self.displayDefaultAlertView(title: "Błąd", message: "Nie udało się zapisać produktu. Sprawdź czy masz połączenie z internetem lub spróbuj ponownie później.")
+            self.productsManager.add(localProduct: self.product)
 
-            if let error = error {
-                print(error)
-            }
-        }
+            self.dismiss(animated: true, completion: nil)
 
-        guard let token = self.authenticator.token else {
-            handleError(nil)
-            return
-        }
+        } else {
 
-        let method: FridgeApi = (self.isNewProduct == true ? .addProduct(product: self.product, token: token) :
-                                                             .updateProduct(product: self.product, token: token))
+            do {
+                try self.productsManager.update(with: self.product)
 
-        FridgeApiProvider.request(method) { (result) in
+                self.dismiss(animated: true, completion: nil)
 
-            switch result {
+            } catch {
 
-            case .success(let response):
-
-                print(String(data: response.data, encoding: .utf8))
-
-                guard response.statusCode == 200 || response.statusCode == 201 else {
-                    handleError(nil)
-                    return
-                }
-
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
-                }
-
-            case .failure(let error):
-
-                handleError(error)
+                self.displayDefaultAlertView(title: "Błąd", message: "Nie udało się zapisać zmian.")
             }
         }
     }
