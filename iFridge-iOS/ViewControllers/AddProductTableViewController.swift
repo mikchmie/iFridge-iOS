@@ -1,5 +1,5 @@
 //
-//  ProductDetailsTableViewController.swift
+//  AddProductTableViewController.swift
 //  iFridge-iOS
 //
 //  Created by Mikołaj on 15.10.2016.
@@ -8,14 +8,10 @@
 
 import UIKit
 
-class ProductDetailsTableViewController: UITableViewController {
+class AddProductTableViewController: UITableViewController {
 
-    var product: Product!
-    var authenticator: Authenticator!
+    var product = Product(id: Int(ProductsDBManager.NoID))
     var productsManager: ProductsDBManager!
-    var isNewProduct: Bool {
-        return self.product.id == Int(ProductsDBManager.NoID)
-    }
 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var shopTextField: UITextField!
@@ -27,11 +23,6 @@ class ProductDetailsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if self.product == nil {
-
-            self.product = Product(id: Int(ProductsDBManager.NoID))
-        }
-
         let navigationBar = UINavigationBar()
         let barHeight = 44.0 + UIApplication.shared.statusBarFrame.height
         navigationBar.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: barHeight)
@@ -41,12 +32,15 @@ class ProductDetailsTableViewController: UITableViewController {
         self.tableView.allowsSelection = false
 
         self.nameTextField.text = self.product.name
-        self.nameTextField.isEnabled = self.isNewProduct
         self.shopTextField.text = self.product.shop
-        self.shopTextField.isEnabled = self.isNewProduct
         self.quantityTextField.text = "\(self.product.quantity)"
-        self.quantityTextField.isEnabled = self.isNewProduct
         self.quantityStepper.value = Double(self.product.quantity)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.nameTextField.becomeFirstResponder()
     }
 
     // MARK: - Actions
@@ -72,6 +66,10 @@ class ProductDetailsTableViewController: UITableViewController {
         self.product.shop = self.shopTextField.text ?? ""
         self.product.quantity = Int(self.quantityStepper.value)
 
+        [self.nameTextField, self.shopTextField, self.quantityTextField].forEach {
+            $0.resignFirstResponder()
+        }
+
         self.saveProduct()
     }
 
@@ -79,24 +77,8 @@ class ProductDetailsTableViewController: UITableViewController {
 
     func saveProduct() {
 
-        if self.isNewProduct == true {
-
-            self.productsManager.add(localProduct: self.product)
-
-            self.dismiss(animated: true, completion: nil)
-
-        } else {
-
-            do {
-                try self.productsManager.update(with: self.product)
-
-                self.dismiss(animated: true, completion: nil)
-
-            } catch {
-
-                self.displayDefaultAlertView(title: "Błąd", message: "Nie udało się zapisać zmian.")
-            }
-        }
+        self.productsManager.add(localProduct: self.product)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

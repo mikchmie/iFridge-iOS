@@ -17,16 +17,14 @@ struct Product: Unboxable {
     var shop: String = ""
     var quantity: Int = 0
     var lastSyncedQuantity: Int = 0
-    var modifiedAt: Int = 0
 
-    init(id: Int = 0, name: String = "", shop: String = "", quantity: Int = 0, lastSyncedQuantity: Int = 0, modifiedAt: Int = 0) {
+    init(id: Int = 0, name: String = "", shop: String = "", quantity: Int = 0, lastSyncedQuantity: Int = 0) {
 
         self.id = id
         self.name = name
         self.shop = shop
         self.quantity = quantity
         self.lastSyncedQuantity = lastSyncedQuantity
-        self.modifiedAt = modifiedAt
     }
 
     init(unboxer: Unboxer) throws {
@@ -36,7 +34,6 @@ struct Product: Unboxable {
         self.shop = try unboxer.unbox(key: "shop")
         self.quantity = try unboxer.unbox(key: "quantity")
         self.lastSyncedQuantity = self.quantity
-        self.modifiedAt = try unboxer.unbox(key: "modifiedAt")
     }
 
 }

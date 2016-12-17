@@ -19,7 +19,7 @@
 		D03192A51DA9222100038E88 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03192A41DA9222100038E88 /* Product.swift */; };
 		D03192A81DA924E800038E88 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03192A71DA924E800038E88 /* ProductTableViewCell.swift */; };
 		D03192AB1DA9257100038E88 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03192AA1DA9257100038E88 /* ReusableView.swift */; };
-		D03F5D651DB28CB60093019B /* ProductDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03F5D641DB28CB60093019B /* ProductDetailsTableViewController.swift */; };
+		D03F5D651DB28CB60093019B /* AddProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03F5D641DB28CB60093019B /* AddProductTableViewController.swift */; };
 		D0424D3E1DB2721500426938 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0424D3D1DB2721500426938 /* UIViewController+Extension.swift */; };
 		D07546291DFDB9EE00EB2E6D /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07546281DFDB9EE00EB2E6D /* SyncManager.swift */; };
 		D075462B1DFDCD5800EB2E6D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D075462A1DFDCD5800EB2E6D /* Date+Extensions.swift */; };
@@ -28,6 +28,7 @@
 		D0853E421DA7BF0300791D00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0853E401DA7BF0300791D00 /* Main.storyboard */; };
 		D0853E471DA7BF0300791D00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0853E461DA7BF0300791D00 /* Assets.xcassets */; };
 		D0853E4A1DA7BF0300791D00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0853E481DA7BF0300791D00 /* LaunchScreen.storyboard */; };
+		D0A5B19C1E0585D100DECCEB /* EditProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A5B19B1E0585D000DECCEB /* EditProductTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +47,7 @@
 		D03192A41DA9222100038E88 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		D03192A71DA924E800038E88 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		D03192AA1DA9257100038E88 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
-		D03F5D641DB28CB60093019B /* ProductDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsTableViewController.swift; sourceTree = "<group>"; };
+		D03F5D641DB28CB60093019B /* AddProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProductTableViewController.swift; sourceTree = "<group>"; };
 		D0424D3D1DB2721500426938 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		D07546281DFDB9EE00EB2E6D /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		D075462A1DFDCD5800EB2E6D /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		D0853E461DA7BF0300791D00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0853E491DA7BF0300791D00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0853E4B1DA7BF0300791D00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0A5B19B1E0585D000DECCEB /* EditProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				D0853E3E1DA7BF0300791D00 /* ProductsTableViewController.swift */,
-				D03F5D641DB28CB60093019B /* ProductDetailsTableViewController.swift */,
+				D03F5D641DB28CB60093019B /* AddProductTableViewController.swift */,
+				D0A5B19B1E0585D000DECCEB /* EditProductTableViewController.swift */,
 				D025411A1DB2BE3D00FBCB22 /* LogInViewController.swift */,
 			);
 			path = ViewControllers;
@@ -325,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0424D3E1DB2721500426938 /* UIViewController+Extension.swift in Sources */,
+				D0A5B19C1E0585D100DECCEB /* EditProductTableViewController.swift in Sources */,
 				D02541171DB2B80100FBCB22 /* Authenticator.swift in Sources */,
 				D0853E3F1DA7BF0300791D00 /* ProductsTableViewController.swift in Sources */,
 				D03192A01DA9200800038E88 /* FridgeApi.swift in Sources */,
@@ -334,7 +338,7 @@
 				D02665981DFD7729007C63FB /* iFridge_iOS.xcdatamodeld in Sources */,
 				D075462B1DFDCD5800EB2E6D /* Date+Extensions.swift in Sources */,
 				D026659A1DFD78CB007C63FB /* ProductsDBManager.swift in Sources */,
-				D03F5D651DB28CB60093019B /* ProductDetailsTableViewController.swift in Sources */,
+				D03F5D651DB28CB60093019B /* AddProductTableViewController.swift in Sources */,
 				D025411D1DB2CFAC00FBCB22 /* String+Extension.swift in Sources */,
 				D03192A51DA9222100038E88 /* Product.swift in Sources */,
 				D03192AB1DA9257100038E88 /* ReusableView.swift in Sources */,

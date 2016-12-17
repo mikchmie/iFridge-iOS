@@ -33,7 +33,7 @@ enum FridgeApi {
 
 extension FridgeApi: TargetType {
 
-    var baseURL: URL { return URL(string: "http://localhost:8080/fridge")! }
+    var baseURL: URL { return URL(string: "http://10.0.0.9:8080/fridge")! }
 
     var path: String {
 

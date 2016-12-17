@@ -13,7 +13,8 @@ class ProductsTableViewController: UITableViewController {
 
     fileprivate enum Segue: String {
 
-        case productDetails = "ProductDetailsSegue"
+        case addProduct = "AddProductSegue"
+        case editProduct = "EditProductSegue"
         case logIn = "LogInSegue"
     }
 
@@ -55,7 +56,7 @@ class ProductsTableViewController: UITableViewController {
             return
         }
 
-        self.performSegue(withIdentifier: Segue.productDetails.rawValue, sender: self)
+        self.performSegue(withIdentifier: Segue.addProduct.rawValue, sender: self)
     }
 
     @IBAction func logOutButtonWasPressed(_ sender: UIBarButtonItem) {
@@ -130,13 +131,22 @@ class ProductsTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if (segue.identifier == Segue.productDetails.rawValue) {
+        switch segue.identifier ?? "" {
 
-            guard let vc = segue.destination as? ProductDetailsTableViewController else { return }
+        case Segue.addProduct.rawValue:
+
+            guard let vc = segue.destination as? AddProductTableViewController else { return }
+            vc.productsManager = self.productsManager
+
+        case Segue.editProduct.rawValue:
+
+            guard let vc = segue.destination as? EditProductTableViewController else { return }
             vc.product = self.selectedProduct
-            vc.authenticator = self.authenticator
             vc.productsManager = self.productsManager
             self.selectedProduct = nil
+
+        default:
+            break
         }
     }
 
@@ -174,7 +184,7 @@ class ProductsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
         self.selectedProduct = products[indexPath.row]
-        self.performSegue(withIdentifier: Segue.productDetails.rawValue, sender: self)
+        self.performSegue(withIdentifier: Segue.editProduct.rawValue, sender: self)
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

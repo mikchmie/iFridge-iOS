@@ -23,7 +23,6 @@ extension CDProduct {
         self.shop = localProduct.shop
         self.quantity = Int32(localProduct.quantity)
         self.lastSyncedQuantity = Int32(localProduct.lastSyncedQuantity)
-        self.modifiedAt = Int64(localProduct.modifiedAt)
     }
 
     static func localProduct(from cdProduct: CDProduct) -> Product {
@@ -32,8 +31,7 @@ extension CDProduct {
                        name: cdProduct.name ?? "",
                        shop: cdProduct.shop ?? "",
                        quantity: Int(cdProduct.quantity),
-                       lastSyncedQuantity: Int(cdProduct.lastSyncedQuantity),
-                       modifiedAt: Int(cdProduct.modifiedAt))
+                       lastSyncedQuantity: Int(cdProduct.lastSyncedQuantity))
     }
 
 }
