@@ -45,12 +45,8 @@ class ProductDetailsTableViewController: UITableViewController {
         self.shopTextField.text = self.product.shop
         self.shopTextField.isEnabled = self.isNewProduct
         self.quantityTextField.text = "\(self.product.quantity)"
+        self.quantityTextField.isEnabled = self.isNewProduct
         self.quantityStepper.value = Double(self.product.quantity)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
     }
 
     // MARK: - Actions

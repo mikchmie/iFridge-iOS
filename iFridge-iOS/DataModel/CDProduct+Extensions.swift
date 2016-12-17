@@ -22,6 +22,7 @@ extension CDProduct {
         self.name = localProduct.name
         self.shop = localProduct.shop
         self.quantity = Int32(localProduct.quantity)
+        self.lastSyncedQuantity = Int32(localProduct.lastSyncedQuantity)
         self.modifiedAt = Int64(localProduct.modifiedAt)
     }
 
@@ -31,6 +32,7 @@ extension CDProduct {
                        name: cdProduct.name ?? "",
                        shop: cdProduct.shop ?? "",
                        quantity: Int(cdProduct.quantity),
+                       lastSyncedQuantity: Int(cdProduct.lastSyncedQuantity),
                        modifiedAt: Int(cdProduct.modifiedAt))
     }
 
