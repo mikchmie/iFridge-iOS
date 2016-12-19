@@ -13,6 +13,10 @@ class AddProductTableViewController: UITableViewController {
     var product = Product(id: Int(ProductsDBManager.NoID))
     var productsManager: ProductsDBManager!
 
+    var deviceID: String {
+        return UIDevice.current.identifierForVendor?.uuidString ?? ""
+    }
+
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var shopTextField: UITextField!
     @IBOutlet weak var quantityTextField: UITextField!
@@ -33,8 +37,9 @@ class AddProductTableViewController: UITableViewController {
 
         self.nameTextField.text = self.product.name
         self.shopTextField.text = self.product.shop
-        self.quantityTextField.text = "\(self.product.quantity)"
-        self.quantityStepper.value = Double(self.product.quantity)
+
+        self.quantityTextField.text = "\(1)"
+        self.quantityStepper.value = 1
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -64,7 +69,7 @@ class AddProductTableViewController: UITableViewController {
 
         self.product.name = self.nameTextField.text ?? ""
         self.product.shop = self.shopTextField.text ?? ""
-        self.product.quantity = Int(self.quantityStepper.value)
+        self.product.quantities[self.deviceID] = Int(self.quantityStepper.value)
 
         [self.nameTextField, self.shopTextField, self.quantityTextField].forEach {
             $0.resignFirstResponder()

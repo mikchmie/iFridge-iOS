@@ -24,7 +24,7 @@ let FridgeApiProvider = MoyaProvider<FridgeApi>(endpointClosure: endpointClosure
 
 enum FridgeApi {
 
-    case logIn(login: String, password: String)
+    case logIn(login: String, password: String, deviceID: String)
     case getAllProducts(token: String)
     case addProduct(product: Product, token: String)
     case updateProduct(product: Product, token: String)
@@ -33,7 +33,7 @@ enum FridgeApi {
 
 extension FridgeApi: TargetType {
 
-    var baseURL: URL { return URL(string: "http://10.0.0.9:8080/fridge")! }
+    var baseURL: URL { return URL(string: "http://localhost:8080/fridge")! }
 
     var path: String {
 
@@ -75,9 +75,10 @@ extension FridgeApi: TargetType {
 
         switch self {
 
-        case .logIn(let login, let password):
+        case .logIn(let login, let password, let deviceID):
             return ["login": login,
-                    "password": password]
+                    "password": password,
+                    "device_id": deviceID]
 
         case .addProduct(let product, _), .updateProduct(let product, _):
             return (try? wrap(product)) ?? [:]

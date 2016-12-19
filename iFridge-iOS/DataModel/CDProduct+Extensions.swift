@@ -16,22 +16,33 @@ extension CDProduct {
         return CDProduct.localProduct(from: self)
     }
 
-    func update(from localProduct: Product) {
+    func initialize(from localProduct: Product, in moc: NSManagedObjectContext) {
 
         self.productId = Int32(localProduct.id)
         self.name = localProduct.name
         self.shop = localProduct.shop
-        self.quantity = Int32(localProduct.quantity)
-        self.lastSyncedQuantity = Int32(localProduct.lastSyncedQuantity)
+
+        for (deviceID, quantity) in localProduct.quantities {
+
+            let cdQuantity = CDProductQuantity(context: moc)
+            cdQuantity.deviceId = deviceID
+            cdQuantity.quantity = Int32(quantity)
+            self.addToQuantities(cdQuantity)
+        }
     }
 
     static func localProduct(from cdProduct: CDProduct) -> Product {
 
+        var quantities = [String: Int]()
+        for cdQuantity in (cdProduct.quantities?.allObjects as? [CDProductQuantity]) ?? [] {
+
+            quantities[cdQuantity.deviceId ?? ""] = Int(cdQuantity.quantity)
+        }
+
         return Product(id: Int(cdProduct.productId),
                        name: cdProduct.name ?? "",
                        shop: cdProduct.shop ?? "",
-                       quantity: Int(cdProduct.quantity),
-                       lastSyncedQuantity: Int(cdProduct.lastSyncedQuantity))
+                       quantities: quantities)
     }
 
 }

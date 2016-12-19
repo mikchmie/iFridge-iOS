@@ -48,6 +48,9 @@ class LogInViewController: UIViewController {
                 case .invalidCredentials:
                     self.displayDefaultAlertView(title: "Błąd", message: "Podana kombinacja loginu i hasła jest nieprawidłowa")
 
+                case .missingDeviceID:
+                    self.displayDefaultAlertView(title: "Błąd", message: "Brak identyfikatora urządzenia")
+
                 case .other:
                     self.displayDefaultAlertView(title: "Błąd", message: "Nie udało się zalogować. Sprawdź czy masz połączenie z internetem lub spróbuj ponownie za chwilę")
                 }

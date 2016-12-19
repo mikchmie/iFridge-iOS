@@ -13,6 +13,10 @@ class EditProductTableViewController: UITableViewController {
     var product: Product!
     var productsManager: ProductsDBManager!
 
+    var deviceID: String {
+        return UIDevice.current.identifierForVendor?.uuidString ?? ""
+    }
+
     @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var quantityStepper: UIStepper!
 
@@ -62,7 +66,8 @@ class EditProductTableViewController: UITableViewController {
 
     @IBAction func saveButtonWasPressed(_ sender: AnyObject) {
 
-        self.product.quantity += Int(self.quantityStepper.value)
+        let initialQuantity = self.product.quantities[self.deviceID] ?? 0
+        self.product.quantities[self.deviceID] = initialQuantity + Int(self.quantityStepper.value)
         self.quantityTextField.resignFirstResponder()
         self.saveProduct()
     }
@@ -72,7 +77,7 @@ class EditProductTableViewController: UITableViewController {
     func saveProduct() {
 
         do {
-            try self.productsManager.update(with: self.product)
+            try self.productsManager.update(with: self.product, forDevice: self.deviceID)
 
             self.dismiss(animated: true, completion: nil)
 

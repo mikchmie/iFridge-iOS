@@ -11,7 +11,7 @@ import SwiftyJSON
 
 enum AuthenticationError: Error {
 
-    case invalidCredentials, other
+    case invalidCredentials, missingDeviceID, other
 }
 
 class Authenticator {
@@ -31,9 +31,15 @@ class Authenticator {
 
     func logIn(login: String, password: String, completion: @escaping (AuthenticationError?) -> Void) {
 
+        guard let deviceID = UIDevice.current.identifierForVendor?.uuidString else {
+
+            completion(.missingDeviceID)
+            return
+        }
+
         let passwordHash = password.sha256
 
-        FridgeApiProvider.request(.logIn(login: login, password: passwordHash)) { (result) in
+        FridgeApiProvider.request(.logIn(login: login, password: passwordHash, deviceID: deviceID)) { (result) in
 
             switch result {
 

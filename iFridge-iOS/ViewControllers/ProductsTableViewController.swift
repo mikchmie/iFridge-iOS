@@ -173,7 +173,12 @@ class ProductsTableViewController: UITableViewController {
 
         cell.nameLabel.text = product.name
         cell.shopLabel.text = product.shop
-        cell.quantityLabel.text = "\(product.quantity)"
+
+        let totalQuantity = product.quantities.reduce(0, { (result, dictPair) -> Int in
+            result + dictPair.value
+        })
+
+        cell.quantityLabel.text = "\(totalQuantity)"
 
         return cell
     }

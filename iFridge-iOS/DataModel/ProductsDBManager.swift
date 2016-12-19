@@ -29,7 +29,7 @@ class ProductsDBManager {
         self.moc.performAndWait {
 
             let newProduct = CDProduct(context: self.moc)
-            newProduct.update(from: product)
+            newProduct.initialize(from: product, in: self.moc)
             newProduct.productId = ProductsDBManager.NoID
             newProduct.modifiedAt = Int64(Date().timestamp)
 
@@ -48,7 +48,7 @@ class ProductsDBManager {
             for product in products {
 
                 let newProduct = CDProduct(context: self.moc)
-                newProduct.update(from: product)
+                newProduct.initialize(from: product, in: self.moc)
             }
 
             do {
@@ -79,7 +79,7 @@ class ProductsDBManager {
         }
     }
 
-    func update(with product: Product) throws {
+    func update(with product: Product, forDevice deviceID: String) throws {
 
         var queryError: Error?
 
@@ -87,8 +87,23 @@ class ProductsDBManager {
 
             do {
                 let currentProduct = try self.getEntity(by: product.id)
-                currentProduct.update(from: product)
                 currentProduct.modifiedAt = Int64(Date().timestamp)
+
+                if let thisQuantity = (currentProduct.quantities?.allObjects as? [CDProductQuantity])?.filter({
+
+                    $0.deviceId == deviceID
+
+                }).first {
+
+                    thisQuantity.quantity = Int32(product.quantities[deviceID] ?? 0)
+
+                } else {
+
+                    let newQuantity = CDProductQuantity(context: self.moc)
+                    newQuantity.deviceId = deviceID
+                    newQuantity.quantity = Int32(product.quantities[deviceID] ?? 0)
+                    currentProduct.addToQuantities(newQuantity)
+                }
 
                 try self.moc.save()
 
