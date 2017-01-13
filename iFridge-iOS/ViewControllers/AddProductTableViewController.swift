@@ -8,12 +8,14 @@
 
 import UIKit
 
-class AddProductTableViewController: UITableViewController {
+class AddProductTableViewController: UITableViewController, UIPickerViewDelegate {
 
-    var product = Product(id: Int(ProductsDBManager.NoID))
     var productsManager: ProductsDBManager!
+    var possibleDuplicates: [Product] = []
 
-    var deviceID: String {
+    private var product = Product(id: Int(ProductsDBManager.NoID))
+
+    private var deviceID: String {
         return UIDevice.current.identifierForVendor?.uuidString ?? ""
     }
 
@@ -21,6 +23,8 @@ class AddProductTableViewController: UITableViewController {
     @IBOutlet weak var shopTextField: UITextField!
     @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var quantityStepper: UIStepper!
+    @IBOutlet weak var duplicateSwitch: UISwitch!
+    @IBOutlet weak var duplicatePickerView: UIPickerView!
 
     // MARK: - View flow
 
@@ -34,6 +38,8 @@ class AddProductTableViewController: UITableViewController {
         self.tableView.tableHeaderView = navigationBar
         self.tableView.isScrollEnabled = false
         self.tableView.allowsSelection = false
+
+        self.duplicatePickerView.delegate = self
 
         self.nameTextField.text = self.product.name
         self.shopTextField.text = self.product.shop
@@ -71,11 +77,29 @@ class AddProductTableViewController: UITableViewController {
         self.product.shop = self.shopTextField.text ?? ""
         self.product.quantities[self.deviceID] = Int(self.quantityStepper.value)
 
+        let duplicateRow = self.duplicatePickerView.selectedRow(inComponent: 0)
+        if duplicateRow != -1 {
+
+            let duplicate = self.possibleDuplicates[duplicateRow]
+            self.product.duplicatesID = duplicate.id
+        }
+
         [self.nameTextField, self.shopTextField, self.quantityTextField].forEach {
             $0.resignFirstResponder()
         }
 
         self.saveProduct()
+    }
+
+    @IBAction func duplicateSwitchValueChanged(_ sender: UISwitch) {
+
+        self.duplicatePickerView.isUserInteractionEnabled = sender.isOn
+        self.duplicatePickerView.alpha = sender.isOn ? 1.0 : 0.5
+
+        if self.possibleDuplicates.count > 0 {
+
+            self.duplicatePickerView.selectedRow(inComponent: 0)
+        }
     }
 
     // MARK: - Saving product
@@ -84,6 +108,18 @@ class AddProductTableViewController: UITableViewController {
 
         self.productsManager.add(localProduct: self.product)
         self.dismiss(animated: true, completion: nil)
+    }
+
+    // MARK: - Picker view delegate
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+
+        return self.possibleDuplicates.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
+        return self.possibleDuplicates[row].name
     }
 }
 

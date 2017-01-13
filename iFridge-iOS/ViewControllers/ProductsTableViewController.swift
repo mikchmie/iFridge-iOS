@@ -18,6 +18,7 @@ class ProductsTableViewController: UITableViewController {
         case logIn = "LogInSegue"
     }
 
+    fileprivate var allProducts: [Product] = []
     fileprivate var products: [Product] = []
     fileprivate var selectedProduct: Product?
 
@@ -118,7 +119,8 @@ class ProductsTableViewController: UITableViewController {
 
     private func getProducts() {
 
-        self.products = self.productsManager.getAll()
+        self.allProducts = self.productsManager.getAll()
+        self.products = self.allProducts.filter({ $0.duplicatesID == nil })
         self.tableView.reloadData()
     }
 
@@ -137,6 +139,7 @@ class ProductsTableViewController: UITableViewController {
 
             guard let vc = segue.destination as? AddProductTableViewController else { return }
             vc.productsManager = self.productsManager
+            vc.possibleDuplicates = self.products
 
         case Segue.editProduct.rawValue:
 
@@ -174,9 +177,19 @@ class ProductsTableViewController: UITableViewController {
         cell.nameLabel.text = product.name
         cell.shopLabel.text = product.shop
 
-        let totalQuantity = product.quantities.reduce(0, { (result, dictPair) -> Int in
+        var totalQuantity = product.quantities.reduce(0, { (result, dictPair) -> Int in
             result + dictPair.value
         })
+
+        self.allProducts.forEach {
+
+            if $0.duplicatesID == product.id {
+
+                totalQuantity += $0.quantities.reduce(0, { (result, dictPair) -> Int in
+                    result + dictPair.value
+                })
+            }
+        }
 
         cell.quantityLabel.text = "\(totalQuantity)"
 

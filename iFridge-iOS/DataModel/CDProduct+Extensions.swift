@@ -22,12 +22,23 @@ extension CDProduct {
         self.name = localProduct.name
         self.shop = localProduct.shop
 
+        if let duplicatesID = localProduct.duplicatesID {
+            self.duplicatesID = NSNumber(value: duplicatesID)
+        }
+
         for (deviceID, quantity) in localProduct.quantities {
 
             let cdQuantity = CDProductQuantity(context: moc)
             cdQuantity.deviceId = deviceID
             cdQuantity.quantity = Int32(quantity)
             self.addToQuantities(cdQuantity)
+        }
+
+        for id in localProduct.duplicatedByIDs {
+
+            let cdID = CDProductID(context: moc)
+            cdID.id = Int32(id)
+            self.addToDuplicatedByIDs(cdID)
         }
     }
 
@@ -39,10 +50,18 @@ extension CDProduct {
             quantities[cdQuantity.deviceId ?? ""] = Int(cdQuantity.quantity)
         }
 
+        var duplicatedByIDs = [Int]()
+        for cdID in (cdProduct.duplicatedByIDs?.allObjects as? [CDProductID]) ?? [] {
+
+            duplicatedByIDs.append(Int(cdID.id))
+        }
+
         return Product(id: Int(cdProduct.productId),
                        name: cdProduct.name ?? "",
                        shop: cdProduct.shop ?? "",
-                       quantities: quantities)
+                       quantities: quantities,
+                       duplicatesID: cdProduct.duplicatesID?.intValue,
+                       duplicatedByIDs: duplicatedByIDs)
     }
 
 }

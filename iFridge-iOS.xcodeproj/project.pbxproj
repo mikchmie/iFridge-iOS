@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8011FD2A64E519B739E0E507 /* Pods_iFridge_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9663B83C70FC304727CEFE3F /* Pods_iFridge_iOS.framework */; };
+		D019CF2B1E292EEA00E066E0 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019CF2A1E292EEA00E066E0 /* Array+Extensions.swift */; };
 		D02541171DB2B80100FBCB22 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02541161DB2B80100FBCB22 /* Authenticator.swift */; };
 		D02541191DB2BB8200FBCB22 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02541181DB2BB8200FBCB22 /* UIApplication+Extension.swift */; };
 		D025411B1DB2BE3D00FBCB22 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D025411A1DB2BE3D00FBCB22 /* LogInViewController.swift */; };
@@ -35,6 +36,8 @@
 		2D311E2E22346391880F6AEC /* Pods-iFridge-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFridge-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iFridge-iOS/Pods-iFridge-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6AF166F9F0ABD10C7DA29DD4 /* Pods-iFridge-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFridge-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-iFridge-iOS/Pods-iFridge-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		9663B83C70FC304727CEFE3F /* Pods_iFridge_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFridge_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D019CF271E29261A00E066E0 /* iFridge_iOS 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iFridge_iOS 2.xcdatamodel"; sourceTree = "<group>"; };
+		D019CF2A1E292EEA00E066E0 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		D02541161DB2B80100FBCB22 /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		D02541181DB2BB8200FBCB22 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		D025411A1DB2BE3D00FBCB22 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +163,7 @@
 		D03192A91DA9253500038E88 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D019CF2A1E292EEA00E066E0 /* Array+Extensions.swift */,
 				D03192AA1DA9257100038E88 /* ReusableView.swift */,
 				D0424D3D1DB2721500426938 /* UIViewController+Extension.swift */,
 				D02541181DB2BB8200FBCB22 /* UIApplication+Extension.swift */,
@@ -232,7 +236,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = MC;
 				TargetAttributes = {
 					D0853E381DA7BF0300791D00 = {
@@ -344,6 +348,7 @@
 				D03192AB1DA9257100038E88 /* ReusableView.swift in Sources */,
 				D026659C1DFD7F10007C63FB /* CDProduct+Extensions.swift in Sources */,
 				D02541191DB2BB8200FBCB22 /* UIApplication+Extension.swift in Sources */,
+				D019CF2B1E292EEA00E066E0 /* Array+Extensions.swift in Sources */,
 				D03192A81DA924E800038E88 /* ProductTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,9 +534,10 @@
 		D02665961DFD7729007C63FB /* iFridge_iOS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D019CF271E29261A00E066E0 /* iFridge_iOS 2.xcdatamodel */,
 				D02665971DFD7729007C63FB /* iFridge_iOS.xcdatamodel */,
 			);
-			currentVersion = D02665971DFD7729007C63FB /* iFridge_iOS.xcdatamodel */;
+			currentVersion = D019CF271E29261A00E066E0 /* iFridge_iOS 2.xcdatamodel */;
 			path = iFridge_iOS.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

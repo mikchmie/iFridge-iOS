@@ -112,7 +112,7 @@ class SyncManager {
             var remainingProducts = products
             remainingProducts.removeFirst()
 
-            self.performUpdates(products: remainingProducts, token: token, completion: completion, failure: failure)
+            self.performAdditions(products: remainingProducts, token: token, completion: completion, failure: failure)
             
         }, failure: failure)
     }
