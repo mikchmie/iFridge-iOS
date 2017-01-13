@@ -11,16 +11,17 @@ import Unbox
 
 class ProductsTableViewController: UITableViewController {
 
-    fileprivate enum Segue: String {
+    private enum Segue: String {
 
         case addProduct = "AddProductSegue"
         case editProduct = "EditProductSegue"
+        case listDuplicates = "DuplicatesListSegue"
         case logIn = "LogInSegue"
     }
 
-    fileprivate var allProducts: [Product] = []
-    fileprivate var products: [Product] = []
-    fileprivate var selectedProduct: Product?
+    private var allProducts: [Product] = []
+    private var products: [Product] = []
+    private var selectedProduct: Product?
 
     private var authenticator: Authenticator {
         return UIApplication.appDelegate.authenticator
@@ -31,8 +32,10 @@ class ProductsTableViewController: UITableViewController {
 
     // MARK: - View flow
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.getProducts()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -43,8 +46,6 @@ class ProductsTableViewController: UITableViewController {
             self.performLogOut()
             return
         }
-
-        self.getProducts()
     }
 
     // MARK: - Actions
@@ -148,6 +149,14 @@ class ProductsTableViewController: UITableViewController {
             vc.productsManager = self.productsManager
             self.selectedProduct = nil
 
+        case Segue.listDuplicates.rawValue:
+
+            guard let vc = segue.destination as? DuplicatesTableViewController,
+                  let product = self.selectedProduct else { return }
+
+            vc.parentProduct = product
+            vc.productsManager = self.productsManager
+
         default:
             break
         }
@@ -201,8 +210,17 @@ class ProductsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        self.selectedProduct = products[indexPath.row]
-        self.performSegue(withIdentifier: Segue.editProduct.rawValue, sender: self)
+        let selectedProduct = products[indexPath.row]
+        self.selectedProduct = selectedProduct
+
+        if self.allProducts.filter({ $0.duplicatesID == selectedProduct.id }).count == 0 {
+
+            self.performSegue(withIdentifier: Segue.editProduct.rawValue, sender: self)
+
+        } else {
+
+            self.performSegue(withIdentifier: Segue.listDuplicates.rawValue, sender: self)
+        }
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

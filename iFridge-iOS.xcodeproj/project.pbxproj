@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8011FD2A64E519B739E0E507 /* Pods_iFridge_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9663B83C70FC304727CEFE3F /* Pods_iFridge_iOS.framework */; };
 		D019CF2B1E292EEA00E066E0 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019CF2A1E292EEA00E066E0 /* Array+Extensions.swift */; };
+		D019CF2D1E293CEF00E066E0 /* DuplicatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019CF2C1E293CEF00E066E0 /* DuplicatesTableViewController.swift */; };
 		D02541171DB2B80100FBCB22 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02541161DB2B80100FBCB22 /* Authenticator.swift */; };
 		D02541191DB2BB8200FBCB22 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02541181DB2BB8200FBCB22 /* UIApplication+Extension.swift */; };
 		D025411B1DB2BE3D00FBCB22 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D025411A1DB2BE3D00FBCB22 /* LogInViewController.swift */; };
@@ -38,6 +39,7 @@
 		9663B83C70FC304727CEFE3F /* Pods_iFridge_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFridge_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D019CF271E29261A00E066E0 /* iFridge_iOS 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iFridge_iOS 2.xcdatamodel"; sourceTree = "<group>"; };
 		D019CF2A1E292EEA00E066E0 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		D019CF2C1E293CEF00E066E0 /* DuplicatesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatesTableViewController.swift; sourceTree = "<group>"; };
 		D02541161DB2B80100FBCB22 /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		D02541181DB2BB8200FBCB22 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		D025411A1DB2BE3D00FBCB22 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				D03F5D641DB28CB60093019B /* AddProductTableViewController.swift */,
 				D0A5B19B1E0585D000DECCEB /* EditProductTableViewController.swift */,
 				D025411A1DB2BE3D00FBCB22 /* LogInViewController.swift */,
+				D019CF2C1E293CEF00E066E0 /* DuplicatesTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				D02665981DFD7729007C63FB /* iFridge_iOS.xcdatamodeld in Sources */,
 				D075462B1DFDCD5800EB2E6D /* Date+Extensions.swift in Sources */,
 				D026659A1DFD78CB007C63FB /* ProductsDBManager.swift in Sources */,
+				D019CF2D1E293CEF00E066E0 /* DuplicatesTableViewController.swift in Sources */,
 				D03F5D651DB28CB60093019B /* AddProductTableViewController.swift in Sources */,
 				D025411D1DB2CFAC00FBCB22 /* String+Extension.swift in Sources */,
 				D03192A51DA9222100038E88 /* Product.swift in Sources */,

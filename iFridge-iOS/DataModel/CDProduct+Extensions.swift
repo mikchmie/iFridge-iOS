@@ -33,13 +33,6 @@ extension CDProduct {
             cdQuantity.quantity = Int32(quantity)
             self.addToQuantities(cdQuantity)
         }
-
-        for id in localProduct.duplicatedByIDs {
-
-            let cdID = CDProductID(context: moc)
-            cdID.id = Int32(id)
-            self.addToDuplicatedByIDs(cdID)
-        }
     }
 
     static func localProduct(from cdProduct: CDProduct) -> Product {
@@ -50,18 +43,11 @@ extension CDProduct {
             quantities[cdQuantity.deviceId ?? ""] = Int(cdQuantity.quantity)
         }
 
-        var duplicatedByIDs = [Int]()
-        for cdID in (cdProduct.duplicatedByIDs?.allObjects as? [CDProductID]) ?? [] {
-
-            duplicatedByIDs.append(Int(cdID.id))
-        }
-
         return Product(id: Int(cdProduct.productId),
                        name: cdProduct.name ?? "",
                        shop: cdProduct.shop ?? "",
                        quantities: quantities,
-                       duplicatesID: cdProduct.duplicatesID?.intValue,
-                       duplicatedByIDs: duplicatedByIDs)
+                       duplicatesID: cdProduct.duplicatesID?.intValue)
     }
 
 }

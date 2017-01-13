@@ -101,6 +101,7 @@
                         <segue destination="dDp-Ck-OvE" kind="presentation" identifier="AddProductSegue" id="yhX-zn-cXt"/>
                         <segue destination="9nG-g3-sro" kind="presentation" identifier="LogInSegue" id="OIc-Ri-ISQ"/>
                         <segue destination="zyb-wb-0lw" kind="presentation" identifier="EditProductSegue" id="U90-Km-S2B"/>
+                        <segue destination="Umi-t1-xSy" kind="show" identifier="DuplicatesListSegue" id="rCn-cm-IN9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lP1-82-25X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -172,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VWz-En-woo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="519" y="819"/>
+            <point key="canvasLocation" x="-79" y="1079"/>
         </scene>
         <!--Zmień ilość produktu-->
         <scene sceneID="kjQ-df-GeO">
@@ -256,13 +257,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXp-92-Jna" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1314.4000000000001" y="805.54722638680664"/>
+            <point key="canvasLocation" x="848" y="1079"/>
         </scene>
         <!--Wybierz duplikat-->
         <scene sceneID="9Xg-7V-PJE">
             <objects>
-                <tableViewController id="Umi-t1-xSy" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xbw-57-snb">
+                <tableViewController id="Umi-t1-xSy" customClass="DuplicatesTableViewController" customModule="iFridge_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xbw-57-snb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -320,10 +321,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Wybierz duplikat" id="yYe-Sy-k3u"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="zyb-wb-0lw" kind="presentation" identifier="EditProductSegue" id="bPK-N3-9Zm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ou3-8g-KSH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2087" y="630"/>
+            <point key="canvasLocation" x="1382" y="276"/>
         </scene>
         <!--Dodaj produkt-->
         <scene sceneID="W2m-aw-hNt">
@@ -515,7 +519,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N57-bt-EPL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1291.875" y="71.83098591549296"/>
+            <point key="canvasLocation" x="1382" y="-450"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rLl-hw-66a">
@@ -534,4 +538,7 @@
             <point key="canvasLocation" x="-285" y="73"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="bPK-N3-9Zm"/>
+    </inferredMetricsTieBreakers>
 </document>
