@@ -33,6 +33,7 @@ class DuplicatesTableViewController: UITableViewController {
 
     private func getProducts() {
 
+        self.parentProduct = self.productsManager.get(by: self.parentProduct.id)
         let allProducts = self.productsManager.getAll()
 
         self.products = [self.parentProduct]
@@ -103,17 +104,25 @@ class DuplicatesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 
-        guard indexPath.row != 0 else { return [] }
-        
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Usuń") { (action, indexPath) in
             
             guard indexPath.row < self.products.count else { return }
             
             let productID = self.products[indexPath.row].id
             self.products.remove(at: indexPath.row)
-            tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
             
             self.deleteProduct(productID: productID)
+
+            if indexPath.row == 0 {
+
+                if self.products.count >= 2 {
+                    self.parentProduct = self.products.first
+                } else {
+                    _ = self.navigationController?.popViewController(animated: true)
+                }
+            }
+
+            tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
         
         return [deleteAction]

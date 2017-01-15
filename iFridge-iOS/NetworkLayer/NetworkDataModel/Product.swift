@@ -17,14 +17,17 @@ struct Product: Unboxable {
     var shop: String = ""
     var quantities: [String: Int] = [:]
     var duplicatesID: Int? = nil
+    var shouldCascadeDuplicates: Bool = false
 
-    init(id: Int = 0, name: String = "", shop: String = "", quantities: [String: Int] = [:], duplicatesID: Int? = nil) {
+    init(id: Int = 0, name: String = "", shop: String = "", quantities: [String: Int] = [:],
+         duplicatesID: Int? = nil, shouldCascadeDuplicates: Bool = false) {
 
         self.id = id
         self.name = name
         self.shop = shop
         self.quantities = quantities
         self.duplicatesID = duplicatesID
+        self.shouldCascadeDuplicates = shouldCascadeDuplicates
     }
 
     init(unboxer: Unboxer) throws {

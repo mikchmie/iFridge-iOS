@@ -78,7 +78,7 @@ class AddProductTableViewController: UITableViewController, UIPickerViewDelegate
         self.product.quantities[self.deviceID] = Int(self.quantityStepper.value)
 
         let duplicateRow = self.duplicatePickerView.selectedRow(inComponent: 0)
-        if duplicateRow != -1 {
+        if self.duplicateSwitch.isOn == true && duplicateRow != -1 {
 
             let duplicate = self.possibleDuplicates[duplicateRow]
             self.product.duplicatesID = duplicate.id

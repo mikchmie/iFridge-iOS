@@ -73,7 +73,8 @@ class SyncManager {
             return
         }
 
-        FridgeApi.performDeleteProduct(productID: product.id, token: token, completion: {
+        FridgeApi.performDeleteProduct(productID: product.id, cascadeDuplicates: product.shouldCascadeDuplicates,
+                                       token: token, completion: {
 
             var remainingProducts = products
             remainingProducts.removeFirst()

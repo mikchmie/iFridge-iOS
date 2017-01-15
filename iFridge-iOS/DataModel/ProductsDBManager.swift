@@ -117,13 +117,31 @@ class ProductsDBManager {
         }
     }
 
-    func delete(productId: Int) {
+    func delete(productId: Int, shouldCascadeDuplicates: Bool = false) {
 
         self.moc.performAndWait {
 
             do {
                 guard let currentProduct = (try? self.getEntity(by: productId)) else {
                     return
+                }
+
+                if shouldCascadeDuplicates == false {
+
+                    let predicate = NSPredicate(format: "duplicatesID == \(productId)")
+                    let duplicates = self.getEntities(with: predicate)
+
+                    for (index, duplicate) in duplicates.enumerated() {
+
+                        if index == 0 {
+
+                            duplicate.duplicatesID = nil
+
+                        } else if duplicates.count > 1 {
+
+                            duplicate.duplicatesID = NSNumber(value: duplicates[0].productId)
+                        }
+                    }
                 }
 
                 if currentProduct.productId == ProductsDBManager.NoID {
@@ -133,6 +151,7 @@ class ProductsDBManager {
                 } else {
 
                     currentProduct.isMarkedForDeletion = true
+                    currentProduct.shouldCascadeDuplicates = shouldCascadeDuplicates
                     currentProduct.modifiedAt = 0
                 }
 

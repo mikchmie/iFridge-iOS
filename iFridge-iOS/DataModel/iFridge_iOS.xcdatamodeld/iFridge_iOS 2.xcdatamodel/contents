@@ -8,6 +8,7 @@
         <attribute name="productId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="shop" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shouldCascadeDuplicates" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="quantities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDProductQuantity" inverseName="product" inverseEntity="CDProductQuantity" syncable="YES"/>
     </entity>
     <entity name="CDProductQuantity" representedClassName=".CDProductQuantity" syncable="YES" codeGenerationType="class">
@@ -16,7 +17,7 @@
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDProduct" inverseName="quantities" inverseEntity="CDProduct" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CDProduct" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="CDProduct" positionX="-63" positionY="-18" width="128" height="180"/>
         <element name="CDProductQuantity" positionX="-63" positionY="27" width="128" height="30"/>
     </elements>
 </model>

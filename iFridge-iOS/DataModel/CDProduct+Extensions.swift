@@ -47,7 +47,8 @@ extension CDProduct {
                        name: cdProduct.name ?? "",
                        shop: cdProduct.shop ?? "",
                        quantities: quantities,
-                       duplicatesID: cdProduct.duplicatesID?.intValue)
+                       duplicatesID: cdProduct.duplicatesID?.intValue,
+                       shouldCascadeDuplicates: cdProduct.shouldCascadeDuplicates)
     }
 
 }

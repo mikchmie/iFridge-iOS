@@ -127,7 +127,7 @@ class ProductsTableViewController: UITableViewController {
 
     private func deleteProduct(productID: Int) {
 
-        self.productsManager.delete(productId: productID)
+        self.productsManager.delete(productId: productID, shouldCascadeDuplicates: true)
     }
 
     // MARK: - Navigation

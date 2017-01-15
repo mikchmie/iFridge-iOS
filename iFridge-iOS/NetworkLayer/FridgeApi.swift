@@ -28,7 +28,7 @@ enum FridgeApi {
     case getAllProducts(token: String)
     case addProduct(product: Product, token: String)
     case updateProduct(product: Product, token: String)
-    case deleteProduct(productID: Int, token: String)
+    case deleteProduct(productID: Int, cascadeDuplicates: Bool, token: String)
 }
 
 extension FridgeApi: TargetType {
@@ -48,7 +48,7 @@ extension FridgeApi: TargetType {
         case .updateProduct(let product, _):
             return "/products/\(product.id)"
 
-        case .deleteProduct(let productID, _):
+        case .deleteProduct(let productID, _, _):
             return "/products/\(productID)"
         }
     }
@@ -83,7 +83,10 @@ extension FridgeApi: TargetType {
         case .addProduct(let product, _), .updateProduct(let product, _):
             return (try? wrap(product)) ?? [:]
 
-        case .getAllProducts, .deleteProduct:
+        case .deleteProduct(_, let cascade, _):
+            return ["cascade": cascade]
+
+        case .getAllProducts:
             return nil
         }
     }
@@ -103,7 +106,7 @@ extension FridgeApi: TargetType {
 
         switch self {
 
-        case .getAllProducts(let token), .addProduct(_, let token), .updateProduct(_, let token), .deleteProduct(_, let token):
+        case .getAllProducts(let token), .addProduct(_, let token), .updateProduct(_, let token), .deleteProduct(_, _, let token):
             return ["Authorization": token]
 
         case .logIn:
@@ -230,10 +233,10 @@ extension FridgeApi {
         }
     }
 
-    static func performDeleteProduct(productID: Int, token: String,
+    static func performDeleteProduct(productID: Int, cascadeDuplicates: Bool, token: String,
                               completion: @escaping () -> Void, failure: ((Swift.Error) -> Void)?) {
 
-        FridgeApiProvider.request(.deleteProduct(productID: productID, token: token)) { (result) in
+        FridgeApiProvider.request(.deleteProduct(productID: productID, cascadeDuplicates: cascadeDuplicates, token: token)) { (result) in
 
             switch result {
 
