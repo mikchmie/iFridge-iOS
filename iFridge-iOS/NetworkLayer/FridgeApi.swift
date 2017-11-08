@@ -14,9 +14,9 @@ let endpointClosure = { (target: FridgeApi) -> Endpoint<FridgeApi> in
 
     let url = target.baseURL.appendingPathComponent(target.path).absoluteString
 
-    let endpoint: Endpoint<FridgeApi> = Endpoint<FridgeApi>(URL: url, sampleResponseClosure: {.networkResponse(200, target.sampleData)},
+    let endpoint: Endpoint<FridgeApi> = Endpoint<FridgeApi>(url: url, sampleResponseClosure: {.networkResponse(200, target.sampleData)},
                                                             method: target.method, parameters: target.parameters,
-                                                            parameterEncoding: target.parameterEncoding, httpHeaderFields: target.httpHeaderFields)
+                                                            parameterEncoding: target.parameterEncoding, httpHeaderFields: target.headers)
     return endpoint
 }
 
@@ -58,16 +58,16 @@ extension FridgeApi: TargetType {
         switch self {
 
         case .getAllProducts:
-            return .GET
+            return .get
 
         case .logIn, .addProduct:
-            return .POST
+            return .post
 
         case .updateProduct:
-            return .PUT
+            return .put
 
         case .deleteProduct:
-            return .DELETE
+            return .delete
         }
     }
 
@@ -102,7 +102,7 @@ extension FridgeApi: TargetType {
         }
     }
 
-    var httpHeaderFields: [String: String]? {
+    var headers: [String: String]? {
 
         switch self {
 

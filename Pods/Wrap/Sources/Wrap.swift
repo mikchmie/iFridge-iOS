@@ -4,7 +4,7 @@
  *  For usage, see documentation of the classes/symbols listed in this file, as well
  *  as the guide available at: github.com/johnsundell/wrap
  *
- *  Copyright (c) 2015 John Sundell. Licensed under the MIT license, as follows:
+ *  Copyright (c) 2015 - 2017 John Sundell. Licensed under the MIT license, as follows:
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -100,8 +100,8 @@ public func wrap<T>(_ objects: [T], context: Any? = nil, dateFormatter: DateForm
  *  See the documentation for the dictionary-based `wrap()` function for more information
  */
 public func wrap<T>(_ objects: [T], writingOptions: JSONSerialization.WritingOptions? = nil, context: Any? = nil, dateFormatter: DateFormatter? = nil) throws -> Data {
-    let dictionaries: [WrappedDictionary] = try wrap(objects, context: context)
-    return try JSONSerialization.data(withJSONObject: dictionaries as AnyObject, options: writingOptions ?? [])
+	let dictionaries: [WrappedDictionary] = try wrap(objects, context: context, dateFormatter: dateFormatter)
+    return try JSONSerialization.data(withJSONObject: dictionaries, options: writingOptions ?? [])
 }
 
 // Enum describing various styles of keys in a wrapped dictionary
@@ -262,7 +262,7 @@ public extension WrapCustomizable {
     /// Convert a given property name (assumed to be camelCased) to snake_case
     func convertPropertyNameToSnakeCase(propertyName: String) -> String {
         let regex = try! NSRegularExpression(pattern: "(?<=[a-z])([A-Z])|([A-Z])(?=[a-z])", options: [])
-        let range = NSRange(location: 0, length: propertyName.characters.count)
+        let range = NSRange(location: 0, length: propertyName.count)
         let camelCasePropertyName = regex.stringByReplacingMatches(in: propertyName, options: [], range: range, withTemplate: "_$1$2")
         return camelCasePropertyName.lowercased()
     }
@@ -271,7 +271,7 @@ public extension WrapCustomizable {
 /// Extension providing a default wrapping implementation for `RawRepresentable` Enums
 public extension WrappableEnum where Self: RawRepresentable {
     public func wrap(context: Any?, dateFormatter: DateFormatter?) -> Any? {
-        return self.rawValue as AnyObject
+        return self.rawValue
     }
 }
 
@@ -324,6 +324,14 @@ extension NSURL: WrapCustomizable {
     }
 }
 
+/// Extension customizing how URLs are wrapped
+extension URL: WrapCustomizable {
+    public func wrap(context: Any?, dateFormatter: DateFormatter?) -> Any? {
+        return self.absoluteString
+    }
+}
+
+
 /// Extension customizing how NSArrays are wrapped
 extension NSArray: WrapCustomizable {
     public func wrap(context: Any?, dateFormatter: DateFormatter?) -> Any? {
@@ -331,12 +339,14 @@ extension NSArray: WrapCustomizable {
     }
 }
 
+#if !os(Linux)
 /// Extension customizing how NSDictionaries are wrapped
 extension NSDictionary: WrapCustomizable {
     public func wrap(context: Any?, dateFormatter: DateFormatter?) -> Any? {
-        return try? Wrapper(context: context, dateFormatter: dateFormatter).wrap(dictionary: self as [NSObject : AnyObject]) as AnyObject
+        return try? Wrapper(context: context, dateFormatter: dateFormatter).wrap(dictionary: self as [NSObject : AnyObject])
     }
 }
+#endif
 
 /// Extension making Int a WrappableKey
 extension Int: WrappableKey {
@@ -352,12 +362,14 @@ extension Date: WrappableDate {
     }
 }
 
+#if !os(Linux)
 /// Extension making NSdate a WrappableDate
 extension NSDate: WrappableDate {
     public func wrap(dateFormatter: DateFormatter) -> String {
         return dateFormatter.string(from: self as Date)
     }
 }
+#endif
 
 // MARK: - Private
 
@@ -388,33 +400,44 @@ private extension Wrapper {
     
     func wrap<T>(object: T, writingOptions: JSONSerialization.WritingOptions) throws -> Data {
         let dictionary = try self.wrap(object: object, enableCustomizedWrapping: true)
-        return try JSONSerialization.data(withJSONObject: dictionary as AnyObject, options: writingOptions)
+        return try JSONSerialization.data(withJSONObject: dictionary, options: writingOptions)
     }
     
-    func wrap<T>(value: T, propertyName: String? = nil) throws -> Any {
+    func wrap<T>(value: T, propertyName: String? = nil) throws -> Any? {
         if let customizable = value as? WrapCustomizable {
             return try self.performCustomWrapping(object: customizable)
         }
         
         if let date = value as? WrappableDate {
-            return self.wrap(date: date) as AnyObject
+            return self.wrap(date: date)
         }
         
         let mirror = Mirror(reflecting: value)
         
         if mirror.children.isEmpty {
-            if mirror.displayStyle == .enum {
-                if let wrappableEnum = value as? WrappableEnum {
-                    if let wrapped = wrappableEnum.wrap(context: self.context, dateFormatter: self.dateFormatter) {
-                        return wrapped
+            if let displayStyle = mirror.displayStyle {
+                switch displayStyle {
+                case .enum:
+                    if let wrappableEnum = value as? WrappableEnum {
+                        if let wrapped = wrappableEnum.wrap(context: self.context, dateFormatter: self.dateFormatter) {
+                            return wrapped
+                        }
+
+                        throw WrapError.wrappingFailedForObject(value)
                     }
-                    
-                    throw WrapError.wrappingFailedForObject(value)
+
+                    return "\(value)"
+                case .struct:
+                    return [:]
+                default:
+                    return value
                 }
-                
-                return "\(value)"
-            } else if mirror.displayStyle == .struct {
-                return [:]
+            }
+
+            if !(value is CustomStringConvertible) {
+                if String(describing: value) == "(Function)" {
+                    return nil
+                }
             }
             
             return value
@@ -432,14 +455,15 @@ private extension Wrapper {
         let wrapper = Wrapper(context: self.context, dateFormatter: self.dateFormatter)
         
         for element in collection {
-            let wrapped = try wrapper.wrap(value: element)
-            wrappedArray.append(wrapped)
+            if let wrapped = try wrapper.wrap(value: element) {
+                wrappedArray.append(wrapped)
+            }
         }
         
         return wrappedArray
     }
     
-    func wrap<K: Hashable, V>(dictionary: [K : V]) throws -> WrappedDictionary {
+    func wrap<K, V>(dictionary: [K : V]) throws -> WrappedDictionary {
         var wrappedDictionary = WrappedDictionary()
         let wrapper = Wrapper(context: self.context, dateFormatter: self.dateFormatter)
         
@@ -484,11 +508,12 @@ private extension Wrapper {
         
         for mirror in mirrors {
             for property in mirror.children {
-                if "\(property.value)" == "nil" {
+
+                if (property.value as? WrapOptional)?.isNil == true {
                     continue
                 }
                 
-                guard let propertyName = property.label, propertyName != "Some" else {
+                guard let propertyName = property.label else {
                     continue
                 }
                 
@@ -519,5 +544,25 @@ private extension Wrapper {
         }
         
         return wrapped
+    }
+}
+
+// MARK: - Nil Handling
+
+private protocol WrapOptional {
+    var isNil: Bool { get }
+}
+
+extension Optional : WrapOptional {
+    var isNil: Bool {
+        switch self {
+        case .none:
+            return true
+        case .some(let wrapped):
+            if let nillable = wrapped as? WrapOptional {
+                return nillable.isNil
+            }
+            return false
+        }
     }
 }

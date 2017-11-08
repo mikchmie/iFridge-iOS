@@ -1,32 +1,32 @@
 PODS:
-  - Alamofire (4.0.1)
-  - Moya (8.0.0-beta.2):
-    - Moya/Core (= 8.0.0-beta.2)
-  - Moya/Core (8.0.0-beta.2):
-    - Alamofire (~> 4.0.0)
-    - Result
-  - Result (3.0.0)
-  - SnapKit (3.0.2)
-  - SwiftyJSON (3.1.1)
-  - Unbox (2.1)
-  - Wrap (2.0)
+  - Alamofire (4.5.1)
+  - Moya (8.0.5):
+    - Moya/Core (= 8.0.5)
+  - Moya/Core (8.0.5):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - Result (3.2.4)
+  - SnapKit (4.0.0)
+  - SwiftyJSON (4.0.0)
+  - Unbox (2.5.0)
+  - Wrap (3.0.0)
 
 DEPENDENCIES:
-  - Moya (= 8.0.0-beta.2)
+  - Moya (~> 8.0)
   - SnapKit
   - SwiftyJSON
   - Unbox
   - Wrap
 
 SPEC CHECKSUMS:
-  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  Moya: 920d40f738e6f4ece84010cec701bb9693be8251
-  Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
-  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
-  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
-  Unbox: 7070b89261391fbd1a9ccb5029079a884b897a62
-  Wrap: e9efa35ea41984a77bf2de4c9492c53ddc443085
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Moya: c37eec09a098ba9991b5a963b291fc5704bdb9ef
+  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  Unbox: 30e437e6151a6de16139375fd4e8dd9a664cfbf7
+  Wrap: 918fdb5157e4f701f9503b2633752d6f94616f84
 
-PODFILE CHECKSUM: e7403414538d954a52801a3a3e4b7bb36658f92c
+PODFILE CHECKSUM: db29c295e75eb6a3659d0f1399c93dd8e910650b
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.3.1
