@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import Result
+import UIKit
 
 class ProductsDBManager {
 

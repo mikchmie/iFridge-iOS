@@ -4,10 +4,7 @@ inhibit_all_warnings!
 
 target 'iFridge-iOS' do
 
-	pod 'Moya', '~> 8.0'
-	pod 'Unbox'
-	pod 'Wrap'
-    pod 'SwiftyJSON'
+	pod 'Moya'
 	pod 'SnapKit'
 
 end

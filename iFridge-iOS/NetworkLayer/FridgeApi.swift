@@ -7,17 +7,13 @@
 //
 
 import Moya
-import Wrap
-import Unbox
 
-let endpointClosure = { (target: FridgeApi) -> Endpoint<FridgeApi> in
+let endpointClosure = { (target: FridgeApi) -> Endpoint in
 
     let url = target.baseURL.appendingPathComponent(target.path).absoluteString
 
-    let endpoint: Endpoint<FridgeApi> = Endpoint<FridgeApi>(url: url, sampleResponseClosure: {.networkResponse(200, target.sampleData)},
-                                                            method: target.method, parameters: target.parameters,
-                                                            parameterEncoding: target.parameterEncoding, httpHeaderFields: target.headers)
-    return endpoint
+    return Endpoint(url: url, sampleResponseClosure: {.networkResponse(200, target.sampleData)},
+                    method: target.method, task: target.task, httpHeaderFields: target.headers)
 }
 
 let FridgeApiProvider = MoyaProvider<FridgeApi>(endpointClosure: endpointClosure)
@@ -70,38 +66,7 @@ extension FridgeApi: TargetType {
             return .delete
         }
     }
-
-    var parameters: [String : Any]? {
-
-        switch self {
-
-        case .logIn(let login, let password, let deviceID):
-            return ["login": login,
-                    "password": password,
-                    "device_id": deviceID]
-
-        case .addProduct(let product, _), .updateProduct(let product, _):
-            return (try? wrap(product)) ?? [:]
-
-        case .deleteProduct(_, let cascade, _):
-            return ["cascade": cascade]
-
-        case .getAllProducts:
-            return nil
-        }
-    }
-
-    var parameterEncoding: Moya.ParameterEncoding {
-        switch self {
-
-        case .logIn, .getAllProducts, .deleteProduct:
-            return URLEncoding.methodDependent
-
-        case .addProduct, .updateProduct:
-            return JSONEncoding.default
-        }
-    }
-
+    
     var headers: [String: String]? {
 
         switch self {
@@ -121,7 +86,24 @@ extension FridgeApi: TargetType {
     
     var task: Task {
         
-        return .request
+        switch self {
+
+        case .logIn(let login, let password, let deviceID):
+            let parameters = ["login": login,
+                              "password": password,
+                              "device_id": deviceID]
+            return .requestParameters(parameters: parameters, encoding: URLEncoding())
+            
+        case .addProduct(let product, _), .updateProduct(let product, _):
+            return .requestJSONEncodable(product)
+            
+        case .deleteProduct(_, let cascade, _):
+            let parameters = ["cascade": cascade]
+            return .requestParameters(parameters: parameters, encoding: URLEncoding())
+            
+        case .getAllProducts:
+            return .requestPlain
+        }
     }
 }
 
@@ -149,7 +131,7 @@ extension FridgeApi {
                 }
 
                 do {
-                    let products: [Product] = try unbox(data: response.data)
+                    let products = try JSONDecoder().decode([Product].self, from: response.data)
                     completion(products)
 
                 } catch {
@@ -183,7 +165,7 @@ extension FridgeApi {
                 }
 
                 do {
-                    let product: Product = try unbox(data: response.data)
+                    let product = try JSONDecoder().decode(Product.self, from: response.data)
                     completion(product)
 
                 } catch {
@@ -217,7 +199,7 @@ extension FridgeApi {
                 }
 
                 do {
-                    let product: Product = try unbox(data: response.data)
+                    let product = try JSONDecoder().decode(Product.self, from: response.data)
                     completion(product)
 
                 } catch {

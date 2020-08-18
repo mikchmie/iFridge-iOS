@@ -6,8 +6,7 @@
 //  Copyright © 2016 MC. All rights reserved.
 //
 
-import Foundation
-import SwiftyJSON
+import UIKit
 
 enum AuthenticationError: Error {
 
