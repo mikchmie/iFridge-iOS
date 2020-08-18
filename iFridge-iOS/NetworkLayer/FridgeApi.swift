@@ -12,8 +12,11 @@ let endpointClosure = { (target: FridgeApi) -> Endpoint in
 
     let url = target.baseURL.appendingPathComponent(target.path).absoluteString
 
-    return Endpoint(url: url, sampleResponseClosure: {.networkResponse(200, target.sampleData)},
-                    method: target.method, task: target.task, httpHeaderFields: target.headers)
+    return Endpoint(url: url,
+                    sampleResponseClosure: { .networkResponse(200, target.sampleData) },
+                    method: target.method,
+                    task: target.task,
+                    httpHeaderFields: target.headers)
 }
 
 let FridgeApiProvider = MoyaProvider<FridgeApi>(endpointClosure: endpointClosure)
@@ -114,7 +117,8 @@ enum FridgeApiError: Swift.Error {
 
 extension FridgeApi {
 
-    static func performGetAllProducts(token: String, completion: @escaping ([Product]) -> Void, failure: ((Swift.Error) -> Void)?) {
+    static func performGetAllProducts(token: String,
+                                      completion: @escaping ([Product]) -> Void, failure: ((Swift.Error) -> Void)?) {
 
         FridgeApiProvider.request(.getAllProducts(token: token)) { (result) in
 
@@ -148,7 +152,7 @@ extension FridgeApi {
     }
 
     static func performAddProduct(product: Product, token: String,
-                           completion: @escaping (Product) -> Void, failure: ((Swift.Error) -> Void)?) {
+                                  completion: @escaping (Product) -> Void, failure: ((Swift.Error) -> Void)?) {
 
         FridgeApiProvider.request(.addProduct(product: product, token: token)) { (result) in
 
@@ -182,7 +186,7 @@ extension FridgeApi {
     }
 
     static func performUpdateProduct(product: Product, token: String,
-                              completion: @escaping (Product) -> Void, failure: ((Swift.Error) -> Void)?) {
+                                     completion: @escaping (Product) -> Void, failure: ((Swift.Error) -> Void)?) {
 
         FridgeApiProvider.request(.updateProduct(product: product, token: token)) { (result) in
 
@@ -216,7 +220,7 @@ extension FridgeApi {
     }
 
     static func performDeleteProduct(productID: Int, cascadeDuplicates: Bool, token: String,
-                              completion: @escaping () -> Void, failure: ((Swift.Error) -> Void)?) {
+                                     completion: @escaping () -> Void, failure: ((Swift.Error) -> Void)?) {
 
         FridgeApiProvider.request(.deleteProduct(productID: productID, cascadeDuplicates: cascadeDuplicates, token: token)) { (result) in
 
