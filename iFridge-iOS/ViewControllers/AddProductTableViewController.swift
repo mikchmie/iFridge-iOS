@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddProductTableViewController: UITableViewController, UIPickerViewDelegate {
+class AddProductTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     var productsManager: ProductsDBManager!
     var possibleDuplicates: [Product] = []
@@ -39,6 +39,7 @@ class AddProductTableViewController: UITableViewController, UIPickerViewDelegate
         self.tableView.isScrollEnabled = false
         self.tableView.allowsSelection = false
 
+        self.duplicatePickerView.dataSource = self
         self.duplicatePickerView.delegate = self
 
         self.nameTextField.text = self.product.name
@@ -110,7 +111,12 @@ class AddProductTableViewController: UITableViewController, UIPickerViewDelegate
         self.dismiss(animated: true, completion: nil)
     }
 
-    // MARK: - Picker view delegate
+    // MARK: - Picker view data source & delegate
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        
+        return 1
+    }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 
